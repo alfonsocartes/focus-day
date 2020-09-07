@@ -1,6 +1,9 @@
 import { useState } from "react";
 import Note from "./Note";
 import NoteCreation from "./NoteCreation";
+import { Grid } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+
 function Notes() {
   const testingData = [
     {
@@ -37,23 +40,35 @@ function Notes() {
   }
 
   return (
-    <div className="notes-container">
-      <div>
-        <h1>Notes</h1>
-      </div>
+    <div>
+      <Typography variant="h6" component="h4">
+        Notes
+      </Typography>
       <NoteCreation onAdd={addNote} />
-      <div className="grid"></div>
-      {notes.map((noteItem, index) => {
-        return (
-          <Note
-            key={index}
-            id={index}
-            title={noteItem.title}
-            content={noteItem.content}
-            onDelete={deleteNote}
-          />
-        );
-      })}
+      <div>
+        <Grid
+          container
+          direction="row"
+          justify="space-around"
+          alignItems="flex-start"
+          spacing={4}
+        >
+          {notes.map((noteItem, index) => {
+            const labelId = `checkbox-list-label-${index}`;
+            return (
+              <Grid item xs={4} key={index}>
+                <Note
+                  key={index}
+                  id={index}
+                  title={noteItem.title}
+                  content={noteItem.content}
+                  onDelete={deleteNote}
+                />
+              </Grid>
+            );
+          })}
+        </Grid>
+      </div>
     </div>
   );
 }

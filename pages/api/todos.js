@@ -100,44 +100,44 @@ function deleteTask(req, res) {
   });
 }
 
-app.get("/", function (req, res) {
-  Item.find({}, function (err, foundItems) {
-    if (foundItems.length === 0) {
-      Item.insertMany(defaultItems, function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Successfully saved to collection.");
-        }
-      });
-      res.redirect("/");
-    } else {
-      res.render("list", { listTitle: "Today", newListItems: foundItems });
-    }
-  });
-});
+// app.get("/", function (req, res) {
+//   Item.find({}, function (err, foundItems) {
+//     if (foundItems.length === 0) {
+//       Item.insertMany(defaultItems, function (err) {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           console.log("Successfully saved to collection.");
+//         }
+//       });
+//       res.redirect("/");
+//     } else {
+//       res.render("list", { listTitle: "Today", newListItems: foundItems });
+//     }
+//   });
+// });
 
-app.post("/", function (req, res) {
-  const itemText = req.body.newItem;
+// app.post("/", function (req, res) {
+//   const itemText = req.body.newItem;
 
-  const item = new Item({
-    text: itemText,
-  });
+//   const item = new Item({
+//     text: itemText,
+//   });
 
-  item.save();
-  res.redirect("/");
-});
+//   item.save();
+//   res.redirect("/");
+// });
 
-app.post("/delete", function (req, res) {
-  const checkedItemId = req.body.checkbox;
+// app.post("/delete", function (req, res) {
+//   const checkedItemId = req.body.checkbox;
 
-  Item.findByIdAndRemove(checkedItemId, function (err) {
-    if (!err) {
-      console.log("Successfully deleted checked item.");
-      res.redirect("/");
-    }
-  });
-});
+//   Item.findByIdAndRemove(checkedItemId, function (err) {
+//     if (!err) {
+//       console.log("Successfully deleted checked item.");
+//       res.redirect("/");
+//     }
+//   });
+// });
 
 app.listen(port, function () {
   console.log("Server started successfully.");

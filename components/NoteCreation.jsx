@@ -2,8 +2,29 @@ import { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Container from "@material-ui/core/Container";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  fab: {
+    top: theme.spacing(3),
+    right: theme.spacing(1),
+  },
+}));
 
 function CreateArea(props) {
+  const classes = useStyles();
   const [isExpanded, setExpanded] = useState(false);
 
   const [note, setNote] = useState({
@@ -38,32 +59,41 @@ function CreateArea(props) {
   //TODO: add UUID instead of index
 
   return (
-    <div>
-      <form className="create-note">
-        {isExpanded && (
-          <input
-            name="title"
-            onChange={handleChange}
-            value={note.title}
-            placeholder="Title"
-          />
-        )}
-
-        <textarea
-          name="content"
-          onClick={expand}
+    <Container component="main" maxWidth="xs">
+      {isExpanded && (
+        <TextField
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          name="title"
           onChange={handleChange}
-          value={note.content}
-          placeholder="Add a note..."
-          rows={isExpanded ? 3 : 1}
+          value={note.title}
+          placeholder="Title"
         />
-        <Zoom in={isExpanded}>
-          <Fab onClick={addNote}>
-            <AddIcon />
-          </Fab>
-        </Zoom>
-      </form>
-    </div>
+      )}
+      <TextField
+        variant="outlined"
+        margin="normal"
+        fullWidth
+        name="content"
+        onClick={expand}
+        onChange={handleChange}
+        value={note.content}
+        placeholder="Add a note..."
+        multiline={isExpanded}
+        rows={isExpanded ? 5 : 1}
+      />
+      <Zoom in={isExpanded}>
+        <Fab
+          className={classes.fab}
+          size="small"
+          color="primary"
+          aria-label="add"
+        >
+          <AddIcon />
+        </Fab>
+      </Zoom>
+    </Container>
   );
 }
 
