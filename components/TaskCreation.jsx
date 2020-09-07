@@ -11,6 +11,8 @@ function TaskCreation(props) {
     setNewTask(newValue);
   }
 
+  //TODO: add UUID instead of index
+
   return (
     <div>
       <form className="create-task">

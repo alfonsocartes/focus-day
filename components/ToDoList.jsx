@@ -3,7 +3,13 @@ import Task from "./Task";
 import TaskCreation from "./TaskCreation";
 
 function ToDoList() {
-  const [tasks, setTasks] = useState([]);
+  const testingData = [
+    "Welcome to your todolist!",
+    "Hit the + button to add a new item.",
+    "<-- Hit this to delete an item.",
+  ];
+
+  const [tasks, setTasks] = useState(testingData);
 
   function addTask(newTask) {
     setTasks((prevItems) => {
@@ -18,6 +24,8 @@ function ToDoList() {
       });
     });
   }
+
+  //TODO: index must be UUID, not index. It doesnt work with a check box
 
   return (
     <div className="todo-container">

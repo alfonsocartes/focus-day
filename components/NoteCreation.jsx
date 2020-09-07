@@ -35,6 +35,8 @@ function CreateArea(props) {
     setExpanded(true);
   }
 
+  //TODO: add UUID instead of index
+
   return (
     <div>
       <form className="create-note">

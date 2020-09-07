@@ -2,7 +2,25 @@ import { useState } from "react";
 import Note from "./Note";
 import NoteCreation from "./NoteCreation";
 function Notes() {
-  const [notes, setNotes] = useState([]);
+  const testingData = [
+    {
+      title: "Test 0",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+    {
+      title: "Test 1",
+      content:
+        "Lorem ipsum dolor sit amet, re magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+    {
+      title: "Test 2",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+  ];
+
+  const [notes, setNotes] = useState(testingData);
 
   function addNote(newNote) {
     setNotes((prevNotes) => {

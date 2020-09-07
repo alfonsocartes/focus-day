@@ -1,11 +1,15 @@
 function Task(props) {
   return (
-    <div
-      onClick={() => {
-        props.onChecked(props.id);
-      }}
-    >
-      <li>{props.text}</li>
+    <div>
+      <li>
+        <input
+          type="checkbox"
+          onClick={() => {
+            props.onChecked(props.id);
+          }}
+        />
+        {props.text}
+      </li>
     </div>
   );
 }
