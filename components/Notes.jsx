@@ -19,21 +19,23 @@ function Notes() {
   }
 
   return (
-    <div>
-      <NoteCreation onAdd={addNote} />
-      <div className="grid">
-        {notes.map((noteItem, index) => {
-          return (
-            <Note
-              key={index}
-              id={index}
-              title={noteItem.title}
-              content={noteItem.content}
-              onDelete={deleteNote}
-            />
-          );
-        })}
+    <div className="notes-container">
+      <div>
+        <h1>Notes</h1>
       </div>
+      <NoteCreation onAdd={addNote} />
+      <div className="grid"></div>
+      {notes.map((noteItem, index) => {
+        return (
+          <Note
+            key={index}
+            id={index}
+            title={noteItem.title}
+            content={noteItem.content}
+            onDelete={deleteNote}
+          />
+        );
+      })}
     </div>
   );
 }
