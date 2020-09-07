@@ -1,14 +1,13 @@
-import { useState } from "react";
 import Notes from "./Notes";
 import ToDoList from "./ToDoList";
 
 function App() {
   return (
     <div>
-      <div>
+      <div className="container">
         <ToDoList />
       </div>
-      <div>
+      <div className="container">
         <Notes />
       </div>
     </div>

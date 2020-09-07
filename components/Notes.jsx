@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Note from "./Note";
 import NoteCreation from "./NoteCreation";
-
 function Notes() {
   const [notes, setNotes] = useState([]);
 
@@ -22,17 +21,19 @@ function Notes() {
   return (
     <div>
       <NoteCreation onAdd={addNote} />
-      {notes.map((noteItem, index) => {
-        return (
-          <Note
-            key={index}
-            id={index}
-            title={noteItem.title}
-            content={noteItem.content}
-            onDelete={deleteNote}
-          />
-        );
-      })}
+      <div className="grid">
+        {notes.map((noteItem, index) => {
+          return (
+            <Note
+              key={index}
+              id={index}
+              title={noteItem.title}
+              content={noteItem.content}
+              onDelete={deleteNote}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
