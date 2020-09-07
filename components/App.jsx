@@ -4,6 +4,8 @@ function App() {
   return (
     <div>
       <Note />
+      <Note />
+      <Note />
     </div>
   );
 }
