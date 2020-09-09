@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function App() {
+function App(props) {
   const classes = useStyles();
 
   return (
@@ -62,7 +62,7 @@ function App() {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <Notes />
+        <Notes notes={props.notes} />
       </main>
     </div>
   );

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CreateArea(props) {
+function NoteCreation(props) {
   const classes = useStyles();
   const [isExpanded, setExpanded] = useState(false);
 
@@ -89,6 +89,7 @@ function CreateArea(props) {
           size="small"
           color="primary"
           aria-label="add"
+          onClick={addNote}
         >
           <AddIcon />
         </Fab>
@@ -97,4 +98,4 @@ function CreateArea(props) {
   );
 }
 
-export default CreateArea;
+export default NoteCreation;

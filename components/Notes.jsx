@@ -4,7 +4,7 @@ import NoteCreation from "./NoteCreation";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
-function Notes() {
+function Notes(props) {
   const testingData = [
     {
       title: "Test 0",
@@ -23,20 +23,51 @@ function Notes() {
     },
   ];
 
-  const [notes, setNotes] = useState(testingData);
+  const [notes, setNotes] = useState(props.notes);
+
+  async function addNoteDB(newNote) {
+    try {
+      const res = await fetch("http://localhost:3000/api/notes", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newNote),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   function addNote(newNote) {
     setNotes((prevNotes) => {
       return [...prevNotes, newNote];
     });
+    addNoteDB(newNote);
+  }
+
+  async function deleteNoteDB(id) {
+    try {
+      const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function deleteNote(id) {
     setNotes((prevNotes) => {
-      return prevNotes.filter((noteItem, index) => {
-        return index !== id;
+      return prevNotes.filter((note) => {
+        return note._id !== id;
       });
     });
+    deleteNoteDB(id);
   }
 
   return (
@@ -53,15 +84,14 @@ function Notes() {
           alignItems="flex-start"
           spacing={4}
         >
-          {notes.map((noteItem, index) => {
-            const labelId = `checkbox-list-label-${index}`;
+          {notes.map((note) => {
             return (
-              <Grid item xs={4} key={index}>
+              <Grid item xs={4} key={note._id}>
                 <Note
-                  key={index}
-                  id={index}
-                  title={noteItem.title}
-                  content={noteItem.content}
+                  key={note._id}
+                  id={note._id}
+                  title={note.title}
+                  content={note.content}
                   onDelete={deleteNote}
                 />
               </Grid>
