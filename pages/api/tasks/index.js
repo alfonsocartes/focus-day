@@ -9,7 +9,7 @@ export default async (req, res) => {
     case "GET":
       try {
         const tasks = await Task.find({});
-        res.status(200).json({ success: true, data: tasks });
+        res.status(200).json({ success: true, tasksData: tasks });
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -17,7 +17,7 @@ export default async (req, res) => {
     case "POST":
       try {
         const task = await Task.create(req.body);
-        res.status(201).json({ success: true, data: task });
+        res.status(201).json({ success: true, tasksData: task });
       } catch (error) {
         res.status(400).json({ success: false });
       }

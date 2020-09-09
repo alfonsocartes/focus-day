@@ -16,7 +16,7 @@ export default async (req, res) => {
         if (!task) {
           return res.status(400).json({ success: false });
         }
-        res.status(200).json({ success: true, data: task });
+        res.status(200).json({ success: true, taskData: task });
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -31,7 +31,7 @@ export default async (req, res) => {
         if (!task) {
           return res.status(400).json({ success: false });
         }
-        res.status(200).json({ success: true, data: task });
+        res.status(200).json({ success: true, taskData: task });
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -45,7 +45,7 @@ export default async (req, res) => {
         if (!deletedTask) {
           return res.status(400).json({ success: false });
         }
-        res.status(200).json({ success: true, data: {} });
+        res.status(200).json({ success: true, taskData: {} });
       } catch (error) {
         res.status(400).json({ success: false });
       }

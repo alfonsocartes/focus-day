@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const currentYear = new Date().getFullYear();
 const logoPath = "/Logo cartes.dev small.jpg";
 
-export default function Home({ notes }) {
+export default function Home({ notesData, tasksData }) {
   return (
     <div>
       <Head>
@@ -19,7 +19,7 @@ export default function Home({ notes }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <App notes={notes} />
+        <App notes={notesData} tasks={tasksData} />
       </div>
       {/* <footer className="footer">
         <a
@@ -35,8 +35,19 @@ export default function Home({ notes }) {
   );
 }
 
-Home.getInitialProps = async () => {
-  const res = await fetch("http://localhost:3000/api/notes");
-  const { data } = await res.json();
-  return { notes: data };
-};
+// Initial props
+export async function getServerSideProps(context) {
+  try {
+    //Fetch is now build into nextjs
+    const resNotes = await fetch("http://localhost:3000/api/notes");
+    const { notesData } = await resNotes.json();
+    const resTasks = await fetch("http://localhost:3000/api/tasks");
+    const { tasksData } = await resTasks.json();
+
+    return {
+      props: { notesData, tasksData },
+    };
+  } catch (error) {
+    console.error(error);
+  }
+}

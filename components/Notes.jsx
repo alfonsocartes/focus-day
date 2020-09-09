@@ -23,6 +23,8 @@ function Notes(props) {
     },
   ];
 
+  console.log(props.notes);
+
   const [notes, setNotes] = useState(props.notes);
 
   async function addNoteDB(newNote) {

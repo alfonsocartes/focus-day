@@ -14,30 +14,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ToDoList() {
+function ToDoList(props) {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState([0]);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  // const testingData = [
+  //   "Welcome to your todolist!",
+  //   "Hit the + button to add a new item.",
+  //   "<-- Hit this to delete an item.",
+  // ];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+  console.log(props.tasks);
 
-    setChecked(newChecked);
-  };
-
-  const testingData = [
-    "Welcome to your todolist!",
-    "Hit the + button to add a new item.",
-    "<-- Hit this to delete an item.",
-  ];
-
-  const [tasks, setTasks] = useState(testingData);
+  const [tasks, setTasks] = useState(props.tasks);
 
   function addTask(newTask) {
     setTasks((prevItems) => {
@@ -54,6 +42,21 @@ function ToDoList() {
   //   });
   // }
 
+  const [checked, setChecked] = React.useState([0]);
+
+  const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  };
+
   //TODO: index must be UUID, not index. It doesnt work with a check box
 
   return (
@@ -66,11 +69,9 @@ function ToDoList() {
       <div>
         <List className={classes.root}>
           {tasks.map((todoTask, index) => {
-            const labelId = `checkbox-list-label-${index}`;
-
             return (
               <ListItem
-                key={index}
+                key={todoTask._id}
                 role={undefined}
                 dense
                 button
@@ -82,10 +83,10 @@ function ToDoList() {
                     checked={checked.indexOf(index) !== -1}
                     tabIndex={-1}
                     disableRipple
-                    inputProps={{ "aria-labelledby": labelId }}
+                    inputProps={{ "aria-labelledby": todoTask._id }}
                   />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={`${todoTask}`} />
+                <ListItemText id={todoTask._id} primary={`${todoTask.text}`} />
               </ListItem>
             );
           })}
@@ -94,25 +95,5 @@ function ToDoList() {
     </div>
   );
 }
-// return (
-//   <div>
-//     <div>
-//       <h1>To-Do List</h1>
-//     </div>
-//     <TaskCreation onAdd={addTask} />
-//     <div>
-//       <ul>
-//         {tasks.map((todoTask, index) => (
-//           <Task
-//             key={index}
-//             id={index}
-//             text={todoTask}
-//             onChecked={deleteTask}
-//           />
-//         ))}
-//       </ul>
-//     </div>
-//   </div>
-// );
 
 export default ToDoList;

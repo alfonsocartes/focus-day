@@ -57,7 +57,7 @@ function App(props) {
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
-          <ToDoList />
+          <ToDoList tasks={props.tasks} />
         </div>
       </Drawer>
       <main className={classes.content}>
