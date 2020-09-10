@@ -53,6 +53,13 @@ function NoteCreation(props) {
     };
     props.onAdd(newNote);
 
+    setNote({
+      id: "",
+      title: "",
+      content: "",
+    });
+
+    setExpanded(false);
     event.preventDefault();
   }
 

@@ -51,6 +51,11 @@ function TaskCreation(props) {
       checked: false,
     };
     props.onAdd(newTask);
+    setTask({
+      id: "",
+      checked: false,
+      text: "",
+    });
 
     event.preventDefault();
   }
