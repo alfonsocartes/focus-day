@@ -5,25 +5,23 @@ import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
 function Notes(props) {
-  const testingData = [
-    {
-      title: "Test 0",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    },
-    {
-      title: "Test 1",
-      content:
-        "Lorem ipsum dolor sit amet, re magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    },
-    {
-      title: "Test 2",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    },
-  ];
-
-  console.log(props.notes);
+  // const testingData = [
+  //   {
+  //     title: "Test 0",
+  //     content:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  //   },
+  //   {
+  //     title: "Test 1",
+  //     content:
+  //       "Lorem ipsum dolor sit amet, re magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  //   },
+  //   {
+  //     title: "Test 2",
+  //     content:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  //   },
+  // ];
 
   const [notes, setNotes] = useState(props.notes);
 
@@ -86,9 +84,9 @@ function Notes(props) {
           alignItems="flex-start"
           spacing={4}
         >
-          {notes.map((note) => {
+          {notes.map((note, index) => {
             return (
-              <Grid item xs={4} key={note._id}>
+              <Grid item xs={4} key={index}>
                 <Note
                   key={note._id}
                   id={note._id}

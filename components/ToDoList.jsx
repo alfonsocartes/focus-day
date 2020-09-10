@@ -7,6 +7,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
+import Fab from "@material-ui/core/Fab";
+import Zoom from "@material-ui/core/Zoom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,26 +25,42 @@ function ToDoList(props) {
   //   "<-- Hit this to delete an item.",
   // ];
 
-  console.log(props.tasks);
-
   const [tasks, setTasks] = useState(props.tasks);
 
-  function addTask(newTask) {
+  async function addTaskDB(newTask) {
+    try {
+      const res = await fetch("http://localhost:3000/api/tasks", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTask.text),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function addTask(newTaskText) {
+    const newTask = {
+      text: newTaskText,
+    };
     setTasks((prevItems) => {
       return [...prevItems, newTask];
     });
+    //addTaskDB(newTask);
   }
 
-  // I will not delete the task because the DB will reset each day
-  // function deleteTask(id) {
-  //   setTasks((prevItems) => {
-  //     return prevItems.filter((item, index) => {
-  //       return index !== id;
-  //     });
-  //   });
-  // }
+  function deleteTask(id) {
+    setTasks((prevItems) => {
+      return prevItems.filter((item, index) => {
+        return index !== id;
+      });
+    });
+  }
 
-  const [checked, setChecked] = React.useState([0]);
+  const [checked, setChecked] = useState([]);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -57,6 +75,10 @@ function ToDoList(props) {
     setChecked(newChecked);
   };
 
+  function clearChecked() {
+    //checked.map((task) => deleteTask());
+  }
+
   //TODO: index must be UUID, not index. It doesnt work with a check box
 
   return (
@@ -64,33 +86,46 @@ function ToDoList(props) {
       <Typography variant="h6" component="h4">
         To-Do List
       </Typography>
-
       <TaskCreation onAdd={addTask} />
       <div>
         <List className={classes.root}>
-          {tasks.map((todoTask, index) => {
+          {tasks.map((task, index) => {
             return (
               <ListItem
-                key={todoTask._id}
-                role={undefined}
+                key={index}
                 dense
                 button
-                onClick={handleToggle(index)}
+                onClick={handleToggle(task._id)}
               >
                 <ListItemIcon>
                   <Checkbox
+                    id={task._id}
                     edge="start"
-                    checked={checked.indexOf(index) !== -1}
+                    checked={checked.indexOf(task._id) !== -1}
                     tabIndex={-1}
                     disableRipple
-                    inputProps={{ "aria-labelledby": todoTask._id }}
+                    inputProps={{ "aria-labelledby": task._id }}
                   />
                 </ListItemIcon>
-                <ListItemText id={todoTask._id} primary={`${todoTask.text}`} />
+                <ListItemText id={task._id} primary={`${task.text}`} />
               </ListItem>
             );
           })}
         </List>
+        <Zoom in={true} className={classes.fab}>
+          <Fab
+            variant="extended"
+            size="small"
+            color="primary"
+            aria-label="add"
+            className={classes.margin}
+            onClick={() => {
+              clearChecked;
+            }}
+          >
+            Clear
+          </Fab>
+        </Zoom>
       </div>
     </div>
   );
