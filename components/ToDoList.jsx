@@ -76,19 +76,62 @@ function ToDoList(props) {
     deleteTaskDB(id);
   }
 
-  const [checked, setChecked] = useState([]);
+  async function toggleCheckedStatusDB(task) {
+    console.log("PUT " + task.text);
+    try {
+      const res = await fetch(`http://localhost:3000/api/tasks/${task.id}`, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
+  const initialChecked = [];
+  tasks.map((task) => {
+    if (task.checked) {
+      initialChecked.push(task.id);
+    }
+  });
+
+  const [checked, setChecked] = useState(initialChecked);
+
+  const handleToggle = (task) => () => {
+    const currentIndex = checked.indexOf(task.id);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      newChecked.push(value);
+      newChecked.push(task.id);
     } else {
       newChecked.splice(currentIndex, 1);
     }
 
     setChecked(newChecked);
+
+    // const currentTasksIndex = tasks.indexOf(task);
+    // const newTasks = [...tasks];
+
+    // console.log("handleToggle");
+
+    // newTasks[currentTasksIndex] = {
+    //   ...newTasks[currentTasksIndex],
+    //   checked: !newTasks[currentTasksIndex].checked,
+    // };
+
+    // newTasks.map((task, index) =>
+    //   console.log("newTasks" + index + task.checked)
+    // );
+
+    // setTasks(newTasks);
+    // tasks.map((task, index) => console.log("tasks" + index + task.checked));
+
+    // task.checked = !task.checked;
+    // toggleCheckedStatusDB(task);
   };
 
   function clearChecked() {
@@ -105,15 +148,10 @@ function ToDoList(props) {
         <List className={classes.root}>
           {tasks.map((task, index) => {
             return (
-              <ListItem
-                key={index}
-                dense
-                button
-                onClick={handleToggle(task.id)}
-              >
+              <ListItem key={index} dense button onClick={handleToggle(task)}>
                 <ListItemIcon>
                   <Checkbox
-                    id={task._id}
+                    id={task.id}
                     edge="start"
                     checked={checked.indexOf(task.id) !== -1}
                     tabIndex={-1}
