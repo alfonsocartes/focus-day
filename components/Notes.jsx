@@ -86,7 +86,7 @@ function Notes(props) {
         >
           {notes.map((note, index) => {
             return (
-              <Grid item xs={4} key={index}>
+              <Grid item xs key={index}>
                 <Note
                   key={note._id}
                   id={note._id}

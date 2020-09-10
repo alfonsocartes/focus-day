@@ -79,8 +79,6 @@ function ToDoList(props) {
     //checked.map((task) => deleteTask());
   }
 
-  //TODO: index must be UUID, not index. It doesnt work with a check box
-
   return (
     <div>
       <Typography variant="h6" component="h4">
