@@ -35,29 +35,45 @@ function ToDoList(props) {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newTask.text),
+        body: JSON.stringify(newTask),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  function addTask(newTask) {
+    if (newTask) {
+      addTaskDB(newTask);
+      setTasks((prevTasks) => {
+        return [...prevTasks, newTask];
+      });
+    } else {
+      alert("Task cannot be empty.");
+    }
+  }
+
+  async function deleteTaskDB(id) {
+    console.log(id);
+    try {
+      const res = await fetch(`http://localhost:3000/api/tasks/${id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
       });
     } catch (error) {
       console.log(error);
     }
   }
 
-  function addTask(newTaskText) {
-    const newTask = {
-      text: newTaskText,
-    };
-    setTasks((prevItems) => {
-      return [...prevItems, newTask];
-    });
-    //addTaskDB(newTask);
-  }
-
   function deleteTask(id) {
-    setTasks((prevItems) => {
-      return prevItems.filter((item, index) => {
-        return index !== id;
+    setNotes((prevTasks) => {
+      return prevTasks.filter((task) => {
+        return task.id !== id;
       });
     });
+    deleteTaskDB(id);
   }
 
   const [checked, setChecked] = useState([]);
@@ -93,19 +109,19 @@ function ToDoList(props) {
                 key={index}
                 dense
                 button
-                onClick={handleToggle(task._id)}
+                onClick={handleToggle(task.id)}
               >
                 <ListItemIcon>
                   <Checkbox
                     id={task._id}
                     edge="start"
-                    checked={checked.indexOf(task._id) !== -1}
+                    checked={checked.indexOf(task.id) !== -1}
                     tabIndex={-1}
                     disableRipple
-                    inputProps={{ "aria-labelledby": task._id }}
+                    inputProps={{ "aria-labelledby": task.id }}
                   />
                 </ListItemIcon>
-                <ListItemText id={task._id} primary={`${task.text}`} />
+                <ListItemText id={task.id} primary={`${task.text}`} />
               </ListItem>
             );
           })}

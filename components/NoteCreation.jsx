@@ -47,14 +47,10 @@ function NoteCreation(props) {
 
   function addNote(event) {
     const id = uuidv4();
-    console.log("addNote id " + id);
     const newNote = {
       ...note,
       id: id,
     };
-    console.log("addNote note " + newNote.id);
-    console.log("addNote note " + newNote.title);
-    console.log("addNote note " + newNote.content);
     props.onAdd(newNote);
 
     event.preventDefault();
@@ -63,8 +59,6 @@ function NoteCreation(props) {
   function expand() {
     setExpanded(true);
   }
-
-  //TODO: add UUID instead of index
 
   return (
     <Container component="main" maxWidth="xs">

@@ -40,7 +40,7 @@ export default async (req, res) => {
     case "DELETE":
       try {
         const deletedTask = await Task.deleteOne({
-          _id: id,
+          id: id,
         });
         if (!deletedTask) {
           return res.status(400).json({ success: false });

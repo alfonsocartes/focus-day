@@ -5,6 +5,7 @@ import Zoom from "@material-ui/core/Zoom";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
+import { v4 as uuidv4 } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,36 +26,48 @@ const useStyles = makeStyles((theme) => ({
 
 function TaskCreation(props) {
   const classes = useStyles();
-  const [newTask, setNewTask] = useState("");
+  const [task, setTask] = useState({
+    id: "",
+    checked: false,
+    text: "",
+  });
 
   function handleChange(event) {
-    const newValue = event.target.value;
-    setNewTask(newValue);
+    const { name, value } = event.target;
+
+    setTask((prevTask) => {
+      return {
+        ...prevTask,
+        [name]: value,
+      };
+    });
   }
 
-  //TODO: add UUID instead of index
+  function addTask(event) {
+    const id = uuidv4();
+    const newTask = {
+      ...task,
+      id: id,
+      checked: false,
+    };
+    props.onAdd(newTask);
+
+    event.preventDefault();
+  }
 
   return (
     <Container component="main" maxWidth="xs">
       <TextField
         variant="outlined"
         margin="normal"
-        name="title"
+        name="text"
         onChange={handleChange}
-        value={newTask}
+        value={task.text}
         placeholder="New ToDo"
         className={classes.margin}
       />
       <Zoom in={true} className={classes.fab}>
-        <Fab
-          size="small"
-          color="primary"
-          aria-label="add"
-          onClick={() => {
-            props.onAdd(newTask);
-            setNewTask("");
-          }}
-        >
+        <Fab size="small" color="primary" aria-label="add" onClick={addTask}>
           <AddIcon />
         </Fab>
       </Zoom>

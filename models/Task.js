@@ -6,6 +6,10 @@ const taskSchema = {
     required: true,
     unique: true,
   },
+  checked: {
+    type: Boolean,
+    required: true,
+  },
   text: {
     type: String,
     required: [true, "Task cannot be empty."],

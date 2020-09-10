@@ -41,8 +41,8 @@ function Notes(props) {
   }
 
   function addNote(newNote) {
-    addNoteDB(newNote);
     if (newNote.title && newNote.content) {
+      addNoteDB(newNote);
       setNotes((prevNotes) => {
         return [...prevNotes, newNote];
       });
