@@ -40,7 +40,7 @@ export default async (req, res) => {
     case "DELETE":
       try {
         const deletedNote = await Note.deleteOne({
-          _id: id,
+          id: id,
         });
         if (!deletedNote) {
           return res.status(400).json({ success: false });

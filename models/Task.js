@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const taskSchema = {
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   text: {
     type: String,
     required: [true, "Task cannot be empty."],

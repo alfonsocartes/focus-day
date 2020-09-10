@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
 
 const noteSchema = {
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   title: {
     type: String,
     required: [true, "Please add a title."],
-    unique: true,
     trim: true,
     maxlength: [40, "Title cannot be more than 40 characters."],
   },

@@ -41,13 +41,18 @@ function Notes(props) {
   }
 
   function addNote(newNote) {
-    setNotes((prevNotes) => {
-      return [...prevNotes, newNote];
-    });
     addNoteDB(newNote);
+    if (newNote.title && newNote.content) {
+      setNotes((prevNotes) => {
+        return [...prevNotes, newNote];
+      });
+    } else {
+      alert("Note title and content are required.");
+    }
   }
 
   async function deleteNoteDB(id) {
+    console.log(id);
     try {
       const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
         method: "DELETE",
@@ -64,7 +69,7 @@ function Notes(props) {
   function deleteNote(id) {
     setNotes((prevNotes) => {
       return prevNotes.filter((note) => {
-        return note._id !== id;
+        return note.id !== id;
       });
     });
     deleteNoteDB(id);
@@ -88,8 +93,8 @@ function Notes(props) {
             return (
               <Grid item xs key={index}>
                 <Note
-                  key={note._id}
-                  id={note._id}
+                  key={index}
+                  id={note.id}
                   title={note.title}
                   content={note.content}
                   onDelete={deleteNote}

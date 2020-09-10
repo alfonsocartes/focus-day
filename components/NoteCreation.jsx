@@ -5,6 +5,7 @@ import Zoom from "@material-ui/core/Zoom";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
+import { v4 as uuidv4 } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,6 +29,7 @@ function NoteCreation(props) {
   const [isExpanded, setExpanded] = useState(false);
 
   const [note, setNote] = useState({
+    id: "",
     title: "",
     content: "",
   });
@@ -44,11 +46,17 @@ function NoteCreation(props) {
   }
 
   function addNote(event) {
-    props.onAdd(note);
-    setNote({
-      title: "",
-      content: "",
-    });
+    const id = uuidv4();
+    console.log("addNote id " + id);
+    const newNote = {
+      ...note,
+      id: id,
+    };
+    console.log("addNote note " + newNote.id);
+    console.log("addNote note " + newNote.title);
+    console.log("addNote note " + newNote.content);
+    props.onAdd(newNote);
+
     event.preventDefault();
   }
 
