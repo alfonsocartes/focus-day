@@ -68,7 +68,7 @@ function ToDoList(props) {
   }
 
   function deleteTask(id) {
-    setNotes((prevTasks) => {
+    setTasks((prevTasks) => {
       return prevTasks.filter((task) => {
         return task.id !== id;
       });
@@ -141,9 +141,15 @@ function ToDoList(props) {
     handleModel(task);
   };
 
-  // function clearChecked() {
-  //   checked.map((taskID) => deleteTask(taskID));
-  // }
+  function clearChecked() {
+    console.log("clearChecked");
+    checked.map((taskID) => console.log("clearChecked taskID " + taskID));
+
+    checked.map((taskID) => {
+      deleteTask(taskID);
+    });
+    setChecked([]);
+  }
 
   return (
     <div>
@@ -172,20 +178,18 @@ function ToDoList(props) {
             );
           })}
         </List>
-        {/* <Zoom in={true} className={classes.fab}>
+        <Zoom in={true} className={classes.fab}>
           <Fab
             variant="extended"
             size="small"
             color="primary"
             aria-label="add"
             className={classes.margin}
-            onClick={() => {
-              clearChecked;
-            }}
+            onClick={clearChecked}
           >
             Clear
           </Fab>
-        </Zoom> */}
+        </Zoom>
       </div>
     </div>
   );
