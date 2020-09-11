@@ -19,9 +19,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: 18,
+    marginBottom: theme.spacing(2),
   },
-  pos: {
-    marginBottom: 12,
+  cardActions: {
+    padding: theme.spacing(0),
   },
 }));
 
@@ -43,7 +44,7 @@ function Note(props) {
           {props.content}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions className={classes.cardActions}>
         <IconButton aria-label="delete" onClick={handleClick}>
           <DeleteIcon style={{ color: red[300] }} />
         </IconButton>

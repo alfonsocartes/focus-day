@@ -14,10 +14,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
   },
+
   fab: {
     position: "absolute",
     // top: theme.spacing(3),
     right: theme.spacing(4),
+    //margin: theme.spacing(4),
   },
 }));
 
@@ -173,20 +175,19 @@ function ToDoList(props) {
             );
           })}
         </List>
-        <Zoom in={true}>
-          <Fab
-            variant="extended"
-            size="small"
-            color="primary"
-            aria-label="add"
-            className={classes.margin}
-            onClick={clearChecked}
-            className={classes.fab}
-          >
-            Clear
-          </Fab>
-        </Zoom>
       </div>
+      <Zoom in={true}>
+        <Fab
+          variant="extended"
+          size="small"
+          color="primary"
+          aria-label="add"
+          onClick={clearChecked}
+          className={classes.fab}
+        >
+          Clear
+        </Fab>
+      </Zoom>
     </div>
   );
 }
