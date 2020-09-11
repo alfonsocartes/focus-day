@@ -38,7 +38,7 @@ function Note(props) {
         <Typography className={classes.title} variant="h6" component="h4">
           {props.title}
         </Typography>
-        <Typography variant="body" component="p">
+        <Typography variant="body2" component="p">
           {props.content}
         </Typography>
       </CardContent>
