@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "auto",
     backgroundColor:
       theme.palette.type === "light"
-        ? theme.palette.grey[200]
+        ? theme.palette.grey[100]
         : theme.palette.grey[800],
   },
 }));

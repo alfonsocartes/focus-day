@@ -12,11 +12,10 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary">
       {"Copyright © "}
+      {new Date().getFullYear()}{" "}
       <Link color="inherit" href="https://www.cartes.dev/">
         Alfonso Cartes Guilarte (cartes.dev)
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
+      </Link>
     </Typography>
   );
 }
