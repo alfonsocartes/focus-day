@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Link from "next/Link";
 
 const drawerWidth = 330;
 
@@ -60,7 +61,11 @@ function App(props) {
           <Typography variant="h4" content="h1" className={classes.title}>
             Focus Day
           </Typography>
-          <Button color="inherit">About</Button>
+          <Button color="inherit">
+            <Link href="/about">
+              <a>About</a>
+            </Link>
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
