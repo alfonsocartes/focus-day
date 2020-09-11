@@ -53,7 +53,6 @@ function ToDoList(props) {
   }
 
   async function deleteTaskDB(id) {
-    console.log(id);
     try {
       const res = await fetch(`http://localhost:3000/api/tasks/${id}`, {
         method: "DELETE",
@@ -77,7 +76,6 @@ function ToDoList(props) {
   }
 
   async function toggleCheckedStatusDB(task) {
-    console.log("PUT " + task.text);
     try {
       const res = await fetch(`http://localhost:3000/api/tasks/${task.id}`, {
         method: "PUT",
@@ -118,19 +116,12 @@ function ToDoList(props) {
     const currentTasksIndex = tasks.indexOf(task);
     const newTasks = [...tasks];
 
-    console.log("handleToggle");
-
     newTasks[currentTasksIndex] = {
       ...newTasks[currentTasksIndex],
       checked: !newTasks[currentTasksIndex].checked,
     };
 
-    newTasks.map((task, index) =>
-      console.log("newTasks" + index + task.checked)
-    );
-
     setTasks(newTasks);
-    tasks.map((task, index) => console.log("tasks" + index + task.checked));
 
     task.checked = !task.checked;
     toggleCheckedStatusDB(task);
@@ -142,7 +133,6 @@ function ToDoList(props) {
   };
 
   function clearChecked() {
-    console.log("clearChecked");
     checked.map((taskID) => console.log("clearChecked taskID " + taskID));
 
     checked.map((taskID) => {
