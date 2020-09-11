@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     top: theme.spacing(3),
     left: theme.spacing(1),
   },
+  titleTextField: {
+    width: "83%",
+  },
 }));
 
 function TaskCreation(props) {
@@ -66,7 +69,7 @@ function TaskCreation(props) {
           onChange={handleChange}
           value={task.text}
           placeholder="New ToDo"
-          className={classes.margin}
+          className={(classes.margin, classes.titleTextField)}
         />
         <Zoom in={true} className={classes.fab}>
           <Fab size="small" color="primary" aria-label="add" onClick={addTask}>

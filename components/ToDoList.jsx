@@ -14,6 +14,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
   },
+  fab: {
+    position: "absolute",
+    // top: theme.spacing(3),
+    right: theme.spacing(4),
+  },
 }));
 
 function ToDoList(props) {
@@ -168,7 +173,7 @@ function ToDoList(props) {
             );
           })}
         </List>
-        <Zoom in={true} className={classes.fab}>
+        <Zoom in={true}>
           <Fab
             variant="extended"
             size="small"
@@ -176,6 +181,7 @@ function ToDoList(props) {
             aria-label="add"
             className={classes.margin}
             onClick={clearChecked}
+            className={classes.fab}
           >
             Clear
           </Fab>

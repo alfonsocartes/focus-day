@@ -2,11 +2,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
+import { red } from "@material-ui/core/colors";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
     maxWidth: 375,
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-});
+}));
 
 function Note(props) {
   function handleClick() {
@@ -44,7 +45,7 @@ function Note(props) {
       </CardContent>
       <CardActions>
         <IconButton aria-label="delete" onClick={handleClick}>
-          <DeleteIcon />
+          <DeleteIcon style={{ color: red[300] }} />
         </IconButton>
       </CardActions>
     </Card>
