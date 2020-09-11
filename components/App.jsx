@@ -59,13 +59,11 @@ function App(props) {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h4" content="h1" className={classes.title}>
-            Focus Day
+            FocusDay
           </Typography>
-          <Button color="inherit">
-            <Link href="/about">
-              <a>About</a>
-            </Link>
-          </Button>
+          <Link href="/about">
+            <Button color="inherit">About</Button>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
