@@ -1,26 +1,45 @@
 import React from "react";
 import Head from "next/head";
-const logoPath = "/Logo cartes.dev small.jpg";
-const currentYear = new Date().getFullYear;
+import StickyFooter from "./StickyFooter";
+import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Container from "@material-ui/core/Container";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
+  },
+  // main: {
+  //   marginTop: theme.spacing(8),
+  //   marginBottom: theme.spacing(2),
+  // },
+  footer: {
+    padding: theme.spacing(3, 2),
+    marginTop: "auto",
+    backgroundColor:
+      theme.palette.type === "light"
+        ? theme.palette.grey[200]
+        : theme.palette.grey[800],
+  },
+}));
 
 export default function Layout({ children }) {
+  const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       <Head>
         <title>Focus Day</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>{children}</main>
-      {/* <div>
-        <a
-          href="https://www.cartes.dev"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Copyright ⓒ {currentYear}
-          <img src={logoPath} alt="cartes.dev Logo" className="logo" />
-        </a>
-      </div> */}
+      <CssBaseline />
+      <Container component="main" className={classes.main}>
+        <main>{children}</main>
+      </Container>
+      <footer className={classes.footer}>
+        <StickyFooter />
+      </footer>
     </div>
   );
 }
