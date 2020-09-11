@@ -12,7 +12,7 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const task = await Task.findById(id);
+        const task = await Task.findOne({ id: id });
         if (!task) {
           return res.status(400).json({ success: false });
         }
@@ -24,7 +24,7 @@ export default async (req, res) => {
 
     case "PUT":
       try {
-        const task = await Task.findByIdAndUpdate(id, req.body, {
+        const task = await Task.findOneAndUpdate({ id: id }, req.body, {
           new: true,
           runValidators: true,
         });

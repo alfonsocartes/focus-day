@@ -101,7 +101,7 @@ function ToDoList(props) {
 
   const [checked, setChecked] = useState(initialChecked);
 
-  const handleToggle = (task) => () => {
+  function handleCheckedList(task) {
     const currentIndex = checked.indexOf(task.id);
     const newChecked = [...checked];
 
@@ -112,31 +112,38 @@ function ToDoList(props) {
     }
 
     setChecked(newChecked);
+  }
 
-    // const currentTasksIndex = tasks.indexOf(task);
-    // const newTasks = [...tasks];
+  function handleModel(task) {
+    const currentTasksIndex = tasks.indexOf(task);
+    const newTasks = [...tasks];
 
-    // console.log("handleToggle");
+    console.log("handleToggle");
 
-    // newTasks[currentTasksIndex] = {
-    //   ...newTasks[currentTasksIndex],
-    //   checked: !newTasks[currentTasksIndex].checked,
-    // };
+    newTasks[currentTasksIndex] = {
+      ...newTasks[currentTasksIndex],
+      checked: !newTasks[currentTasksIndex].checked,
+    };
 
-    // newTasks.map((task, index) =>
-    //   console.log("newTasks" + index + task.checked)
-    // );
+    newTasks.map((task, index) =>
+      console.log("newTasks" + index + task.checked)
+    );
 
-    // setTasks(newTasks);
-    // tasks.map((task, index) => console.log("tasks" + index + task.checked));
+    setTasks(newTasks);
+    tasks.map((task, index) => console.log("tasks" + index + task.checked));
 
-    // task.checked = !task.checked;
-    // toggleCheckedStatusDB(task);
+    task.checked = !task.checked;
+    toggleCheckedStatusDB(task);
+  }
+
+  const handleToggle = (task) => () => {
+    handleCheckedList(task);
+    handleModel(task);
   };
 
-  function clearChecked() {
-    //checked.map((task) => deleteTask());
-  }
+  // function clearChecked() {
+  //   checked.map((taskID) => deleteTask(taskID));
+  // }
 
   return (
     <div>
@@ -151,6 +158,7 @@ function ToDoList(props) {
               <ListItem key={index} dense button onClick={handleToggle(task)}>
                 <ListItemIcon>
                   <Checkbox
+                    className={classes.checkbox}
                     id={task.id}
                     edge="start"
                     checked={checked.indexOf(task.id) !== -1}
@@ -164,7 +172,7 @@ function ToDoList(props) {
             );
           })}
         </List>
-        <Zoom in={true} className={classes.fab}>
+        {/* <Zoom in={true} className={classes.fab}>
           <Fab
             variant="extended"
             size="small"
@@ -177,7 +185,7 @@ function ToDoList(props) {
           >
             Clear
           </Fab>
-        </Zoom>
+        </Zoom> */}
       </div>
     </div>
   );

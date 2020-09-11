@@ -12,7 +12,7 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const note = await Note.findById(id);
+        const note = await Note.findOne({ id: id });
         if (!note) {
           return res.status(400).json({ success: false });
         }
@@ -24,7 +24,7 @@ export default async (req, res) => {
 
     case "PUT":
       try {
-        const note = await Note.findByIdAndUpdate(id, req.body, {
+        const note = await Note.findOneAndUpdate({ id: id }, req.body, {
           new: true,
           runValidators: true,
         });
