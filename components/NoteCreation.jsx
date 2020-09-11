@@ -20,7 +20,10 @@ const useStyles = makeStyles((theme) => ({
   },
   fab: {
     top: theme.spacing(3),
-    right: theme.spacing(1),
+    left: theme.spacing(1),
+  },
+  titleTextField: {
+    width: "85%",
   },
 }));
 
@@ -69,40 +72,43 @@ function NoteCreation(props) {
 
   return (
     <Container component="main" maxWidth="xs">
-      {isExpanded && (
+      <form noValidate autoComplete="off">
+        {isExpanded && (
+          <TextField
+            className={classes.titleTextField}
+            variant="outlined"
+            margin="normal"
+            //fullWidth
+            name="title"
+            onChange={handleChange}
+            value={note.title}
+            placeholder="Title"
+          />
+        )}
+        <Zoom in={isExpanded}>
+          <Fab
+            className={classes.fab}
+            size="small"
+            color="primary"
+            aria-label="add"
+            onClick={addNote}
+          >
+            <AddIcon />
+          </Fab>
+        </Zoom>
         <TextField
           variant="outlined"
           margin="normal"
           fullWidth
-          name="title"
+          name="content"
+          onClick={expand}
           onChange={handleChange}
-          value={note.title}
-          placeholder="Title"
+          value={note.content}
+          placeholder="Add a note..."
+          multiline={isExpanded}
+          rows={isExpanded ? 5 : 1}
         />
-      )}
-      <TextField
-        variant="outlined"
-        margin="normal"
-        fullWidth
-        name="content"
-        onClick={expand}
-        onChange={handleChange}
-        value={note.content}
-        placeholder="Add a note..."
-        multiline={isExpanded}
-        rows={isExpanded ? 5 : 1}
-      />
-      <Zoom in={isExpanded}>
-        <Fab
-          className={classes.fab}
-          size="small"
-          color="primary"
-          aria-label="add"
-          onClick={addNote}
-        >
-          <AddIcon />
-        </Fab>
-      </Zoom>
+      </form>
     </Container>
   );
 }

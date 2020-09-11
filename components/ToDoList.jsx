@@ -147,7 +147,7 @@ function ToDoList(props) {
 
   return (
     <div>
-      <Typography variant="h6" component="h4">
+      <Typography variant="h6" component="h2">
         To-Do List
       </Typography>
       <TaskCreation onAdd={addTask} />

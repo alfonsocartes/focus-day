@@ -5,9 +5,10 @@ import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-const drawerWidth = 300;
+const drawerWidth = 330;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,22 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerContainer: {
     overflow: "auto",
+    padding: theme.spacing(2),
+  },
+
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  title: {
+    flexGrow: 1,
   },
   content: {
     flexGrow: 1,
@@ -40,9 +57,10 @@ function App(props) {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h4" content="h1" className={classes.title}>
             Focus Day
           </Typography>
+          <Button color="inherit">About</Button>
         </Toolbar>
       </AppBar>
       <Drawer

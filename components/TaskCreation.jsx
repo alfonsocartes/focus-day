@@ -14,10 +14,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
   fab: {
     top: theme.spacing(3),
     left: theme.spacing(1),
@@ -62,20 +58,22 @@ function TaskCreation(props) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <TextField
-        variant="outlined"
-        margin="normal"
-        name="text"
-        onChange={handleChange}
-        value={task.text}
-        placeholder="New ToDo"
-        className={classes.margin}
-      />
-      <Zoom in={true} className={classes.fab}>
-        <Fab size="small" color="primary" aria-label="add" onClick={addTask}>
-          <AddIcon />
-        </Fab>
-      </Zoom>
+      <form noValidate autoComplete="off">
+        <TextField
+          variant="outlined"
+          margin="normal"
+          name="text"
+          onChange={handleChange}
+          value={task.text}
+          placeholder="New ToDo"
+          className={classes.margin}
+        />
+        <Zoom in={true} className={classes.fab}>
+          <Fab size="small" color="primary" aria-label="add" onClick={addTask}>
+            <AddIcon />
+          </Fab>
+        </Zoom>
+      </form>
     </Container>
   );
 }

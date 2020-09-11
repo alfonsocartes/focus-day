@@ -3,8 +3,17 @@ import Note from "./Note";
 import NoteCreation from "./NoteCreation";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  noteGrid: {
+    //backgroundColor: theme.palette.background.paper,
+    marginTop: theme.spacing(4),
+  },
+}));
 
 function Notes(props) {
+  const classes = useStyles();
   // const testingData = [
   //   {
   //     title: "Test 0",
@@ -77,11 +86,11 @@ function Notes(props) {
 
   return (
     <div>
-      <Typography variant="h6" component="h4">
+      <Typography variant="h6" component="h2">
         Notes
       </Typography>
       <NoteCreation onAdd={addNote} />
-      <div>
+      <div className={classes.noteGrid}>
         <Grid
           container
           direction="row"
