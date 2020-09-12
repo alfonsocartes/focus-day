@@ -1,5 +1,5 @@
+import fetch from "node-fetch";
 import App from "../components/App";
-
 import Layout from "../components/Layout";
 
 export default function Home({ notesData, tasksData }) {
@@ -13,7 +13,12 @@ export default function Home({ notesData, tasksData }) {
 // Initial props
 export async function getServerSideProps(context) {
   //const baseUrl = "http://localhost:3000";
-  const baseUrl = process.env.HOST_URL;
+  //const baseUrl = process.env.HOST_URL;
+
+  //console.log("========= CONTEXT ", context.req.headers.host);
+  const baseUrl = "http://" + context.req.headers.host;
+
+  //console.log("========= baseUrl ", baseUrl);
 
   try {
     //Fetch is now build into nextjs
