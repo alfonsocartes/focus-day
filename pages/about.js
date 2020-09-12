@@ -6,7 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import Link from "next/Link";
+import Link from "next/link";
 import Layout from "../components/Layout";
 
 const drawerWidth = 330;

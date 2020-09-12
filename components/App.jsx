@@ -7,7 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Link from "next/Link";
+import Link from "next/link";
 
 const drawerWidth = 330;
 
