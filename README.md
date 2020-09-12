@@ -1,4 +1,4 @@
-#FocusDay
+##FocusDay
 
 **FocusDay** is a DEMO web app to showcase web development technologies such as:
 
