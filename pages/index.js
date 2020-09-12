@@ -1,36 +1,18 @@
-import fetch from "node-fetch";
+import useSWR from "swr";
 import App from "../components/App";
 import Layout from "../components/Layout";
 
-export default function Home({ notesData, tasksData }) {
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+export default function Index() {
+  const { data: data, error: error } = useSWR("/api", fetcher);
+
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
   return (
     <Layout>
-      <App notes={notesData} tasks={tasksData} />
+      <App notes={data.notes} tasks={data.tasks} />
     </Layout>
   );
-}
-
-// Initial props
-export async function getServerSideProps(context) {
-  //const baseUrl = "http://localhost:3000";
-  //const baseUrl = process.env.HOST_URL;
-
-  //console.log("========= CONTEXT ", context.req.headers.host);
-  const baseUrl = "http://" + context.req.headers.host;
-
-  //console.log("========= baseUrl ", baseUrl);
-
-  try {
-    //Fetch is now build into nextjs
-    const resNotes = await fetch(baseUrl + "/api/notes");
-    const { notesData } = await resNotes.json();
-    const resTasks = await fetch(baseUrl + "/api/tasks");
-    const { tasksData } = await resTasks.json();
-
-    return {
-      props: { notesData, tasksData },
-    };
-  } catch (error) {
-    console.error(error);
-  }
 }
