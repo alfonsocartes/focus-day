@@ -1,35 +1,28 @@
-import Head from "next/head";
 import App from "../components/App";
 
-const currentYear = new Date().getFullYear();
-const logoPath = "/Logo cartes.dev small.jpg";
+import Layout from "../components/Layout";
 
-export default function Home() {
+export default function Home({ notesData, tasksData }) {
   return (
-    <div className="container">
-      <Head>
-        <title>Focus Day</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <header>
-        {" "}
-        <h1 className="title">Welcome to Focus Day!</h1>
-        <p className="description">Get started by adding a new note or TODO</p>
-      </header>
-      <main className="main">
-        <App />
-      </main>
-
-      <footer className="footer">
-        <a
-          href="https://www.cartes.dev"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Copyright ⓒ {currentYear}
-          <img src={logoPath} alt="cartes.dev Logo" className="logo" />
-        </a>
-      </footer>
-    </div>
+    <Layout>
+      <App notes={notesData} tasks={tasksData} />
+    </Layout>
   );
+}
+
+// Initial props
+export async function getServerSideProps(context) {
+  try {
+    //Fetch is now build into nextjs
+    const resNotes = await fetch("http://localhost:3000/api/notes");
+    const { notesData } = await resNotes.json();
+    const resTasks = await fetch("http://localhost:3000/api/tasks");
+    const { tasksData } = await resTasks.json();
+
+    return {
+      props: { notesData, tasksData },
+    };
+  } catch (error) {
+    console.error(error);
+  }
 }
