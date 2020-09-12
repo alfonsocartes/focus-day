@@ -4,6 +4,7 @@ import NoteCreation from "./NoteCreation";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   noteGrid: {
@@ -36,7 +37,7 @@ function Notes(props) {
 
   async function addNoteDB(newNote) {
     try {
-      const res = await fetch("http://localhost:3000/api/notes", {
+      const res = await fetch("/api/notes", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -63,7 +64,7 @@ function Notes(props) {
   async function deleteNoteDB(id) {
     console.log(id);
     try {
-      const res = await fetch(`http://localhost:3000/api/notes/${id}`, {
+      const res = await fetch(`/api/notes/${id}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",

@@ -36,7 +36,7 @@ function ToDoList(props) {
 
   async function addTaskDB(newTask) {
     try {
-      const res = await fetch("http://localhost:3000/api/tasks", {
+      const res = await fetch("/api/tasks", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -61,7 +61,7 @@ function ToDoList(props) {
 
   async function deleteTaskDB(id) {
     try {
-      const res = await fetch(`http://localhost:3000/api/tasks/${id}`, {
+      const res = await fetch(`/api/tasks/${id}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -84,7 +84,7 @@ function ToDoList(props) {
 
   async function toggleCheckedStatusDB(task) {
     try {
-      const res = await fetch(`http://localhost:3000/api/tasks/${task.id}`, {
+      const res = await fetch(`/api/tasks/${task.id}`, {
         method: "PUT",
         headers: {
           Accept: "application/json",
