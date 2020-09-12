@@ -14,9 +14,9 @@ export default function Home({ notesData, tasksData }) {
 export async function getServerSideProps(context) {
   try {
     //Fetch is now build into nextjs
-    const resNotes = await fetch("http://localhost:3000/api/notes");
+    const resNotes = await fetch("/api/notes");
     const { notesData } = await resNotes.json();
-    const resTasks = await fetch("http://localhost:3000/api/tasks");
+    const resTasks = await fetch("/api/tasks");
     const { tasksData } = await resTasks.json();
 
     return {
