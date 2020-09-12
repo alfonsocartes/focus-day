@@ -12,11 +12,12 @@ export default function Home({ notesData, tasksData }) {
 
 // Initial props
 export async function getServerSideProps(context) {
+  const baseUrl = req ? `${req.protocol}://${req.get("Host")}` : "";
   try {
     //Fetch is now build into nextjs
-    const resNotes = await fetch("/api/notes");
+    const resNotes = await fetch(baseUrl + "/api/notes");
     const { notesData } = await resNotes.json();
-    const resTasks = await fetch("/api/tasks");
+    const resTasks = await fetch(baseUrl + "/api/tasks");
     const { tasksData } = await resTasks.json();
 
     return {
