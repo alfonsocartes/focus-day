@@ -14,9 +14,9 @@ FocusDay let's you create ToDos and Notes and saves them in a database. It uses 
 
 This Web App was made by **Alfonso Cartes Guilarte**. For more information [click here](https://www.cartes.dev/)
 
-The source code for the app can be found on [Github](https://github.com/alfonsocartes/focus-day)
+The source code for the app can be found on [GitHub](https://github.com/alfonsocartes/focus-day)
 
-## Getting Started
+## Local Testing
 
 First, run the development server:
 
@@ -29,3 +29,9 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+
+## Vercel Testing
+
+Open [https://focus-day.vercel.app/](https://focus-day.vercel.app/) in your browser to see the result.
+
+You can start testing the app by adding, removing and clearing Notes and Tasks.
