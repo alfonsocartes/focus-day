@@ -12,8 +12,8 @@ export default function Home({ notesData, tasksData }) {
 
 // Initial props
 export async function getServerSideProps(context) {
-  const baseUrl = "https://focus-day.vercel.app";
-  //const baseUrl = "http://localhost:3000";
+  //const baseUrl = "https://focus-day.vercel.app";
+  const baseUrl = "http://localhost:3000";
   try {
     //Fetch is now build into nextjs
     const resNotes = await fetch(baseUrl + "/api/notes");
