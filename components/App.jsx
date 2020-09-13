@@ -10,12 +10,12 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Notes from "./Notes";
-import ToDoList from "./ToDoList";
+import Tasks from "./Tasks";
 
 /*
  *
  * Main container - body for the applications.
- * It includes the Notes component and the ToDoList (tasks) component
+ * It includes the Notes component and the Tasks component
  *
  */
 
@@ -85,7 +85,7 @@ function App(props) {
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
-          <ToDoList tasks={props.tasks} />
+          <Tasks tasks={props.tasks} />
         </div>
       </Drawer>
       <main className={classes.content}>

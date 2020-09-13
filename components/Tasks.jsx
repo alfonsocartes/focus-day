@@ -17,7 +17,7 @@ import TaskCreation from "./TaskCreation";
 
 /*
  *
- * ToDoList component, includes:
+ * Tasks component, includes:
  * - Task creation component
  * - Task grid
  * - CRUD UI controller functions
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ToDoList(props) {
+function Tasks(props) {
   const classes = useStyles();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -267,4 +267,4 @@ function ToDoList(props) {
   );
 }
 
-export default ToDoList;
+export default Tasks;
