@@ -59,7 +59,6 @@ function ToDoList(props) {
         },
         body: JSON.stringify(newTask),
       });
-      console.log("POST STATUS " + res.status);
       return res.status;
     } catch (error) {
       console.log(error);
@@ -98,7 +97,6 @@ function ToDoList(props) {
         },
         body: JSON.stringify(task),
       });
-      console.log("PUT STATUS " + res.status);
       return res.status;
     } catch (error) {
       console.log(error);
@@ -182,7 +180,7 @@ function ToDoList(props) {
 
   async function deleteTask(id) {
     const status = await deleteTaskDB(id);
-    if (status !== 200) {
+    if (status === 400) {
       console.log("deleteTaskDB " + id + " FAILURE " + status);
       alert("Error: could not remove from database.");
       return;
@@ -197,8 +195,6 @@ function ToDoList(props) {
 
   // Removes all the checked items from the state array and DB
   function clearChecked() {
-    checked.map((taskID) => console.log("clearChecked taskID " + taskID));
-
     checked.map((taskID) => {
       deleteTask(taskID);
     });

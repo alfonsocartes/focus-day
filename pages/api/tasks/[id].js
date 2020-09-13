@@ -26,7 +26,7 @@ export default async (req, res) => {
       try {
         const task = await collection.find({ id: id });
         if (!task) {
-          return res.status(400).json({ success: false });
+          res.status(400).json({ success: false });
         }
         res.status(200).json({ success: true, taskData: task });
       } catch (error) {
@@ -42,9 +42,9 @@ export default async (req, res) => {
         );
         // const task = await collection.replaceOne({ id: id }, req.body);
         if (!task) {
-          return res.status(400).json({ success: false });
+          res.status(400).json({ success: false });
         }
-        res.status(204).json({ success: true, taskData: task });
+        return res.status(204).json({ success: true, taskData: task });
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -56,7 +56,7 @@ export default async (req, res) => {
           id: id,
         });
         if (!deletedTask) {
-          return res.status(400).json({ success: false });
+          res.status(400).json({ success: false });
         }
         res.status(200).json({ success: true, taskData: {} });
       } catch (error) {
