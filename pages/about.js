@@ -50,6 +50,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+  },
+  contentTitle: {
     marginBottom: theme.spacing(3),
   },
   content: {
@@ -76,7 +78,11 @@ export default function About() {
         <Container maxWidth="md">
           <main className={classes.content}>
             <Toolbar />
-            <Typography variant="h4" content="h1" className={classes.title}>
+            <Typography
+              variant="h4"
+              content="h1"
+              className={classes.contentTitle}
+            >
               About FocusDay
             </Typography>
             <div>
