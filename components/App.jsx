@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Notes from "./Notes";
-// import ToDoList from "./ToDoList";
+import ToDoList from "./ToDoList";
 
 /*
  *
@@ -85,7 +85,7 @@ function App(props) {
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
-          {/* <ToDoList tasks={props.tasks} /> */}
+          <ToDoList tasks={props.tasks} />
         </div>
       </Drawer>
       <main className={classes.content}>

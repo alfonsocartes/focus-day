@@ -18,11 +18,17 @@ module.exports = async (req, res) => {
   const db = await connectToDatabase(process.env.MONGO_URI);
 
   // Select the "notes" collection from the database
-  const collection = await db.collection("notes");
+  const notesCollection = await db.collection("notes");
 
   // Select the notes collection from the database
-  const notes = await collection.find({}).toArray();
+  const notes = await notesCollection.find({}).toArray();
+
+  // Select the "tasks" collection from the database
+  const tasksCollection = await db.collection("tasks");
+
+  // Select the tasks collection from the database
+  const tasks = await tasksCollection.find({}).toArray();
 
   // Respond with a JSON string of all users in the collection
-  res.status(200).json({ notes });
+  res.status(200).json({ notes, tasks });
 };
