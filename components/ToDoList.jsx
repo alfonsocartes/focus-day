@@ -2,6 +2,7 @@
 //  Copyright © Alfonso Cartes. All rights reserved.
 
 import { useState } from "react";
+import { Grid } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -10,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import TaskCreation from "./TaskCreation";
 
@@ -29,6 +31,10 @@ const useStyles = makeStyles((theme) => ({
   fab: {
     position: "absolute",
     right: theme.spacing(4),
+  },
+  circularProgress: {
+    width: 40,
+    height: 40,
   },
 }));
 
@@ -212,11 +218,17 @@ function ToDoList(props) {
 
   return (
     <div>
-      <Typography variant="h6" component="h2">
-        To-Do List
-      </Typography>
-
-      <TaskCreation onAdd={addTask} isLoading={isLoading} />
+      <Grid container direction="row" justify="space-between">
+        <Grid item>
+          <Typography variant="h6" component="h2">
+            To-Do List
+          </Typography>
+        </Grid>
+        <Grid item className={classes.circularProgress}>
+          {isLoading && <CircularProgress />}
+        </Grid>
+      </Grid>
+      <TaskCreation onAdd={addTask} />
       <div>
         <List className={classes.root}>
           {tasks.map((task, index) => {

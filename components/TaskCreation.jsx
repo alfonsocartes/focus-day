@@ -7,7 +7,6 @@ import Zoom from "@material-ui/core/Zoom";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import AddIcon from "@material-ui/icons/Add";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import { v4 as uuidv4 } from "uuid";
 
@@ -29,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
   fab: {
     top: theme.spacing(3),
     left: theme.spacing(1),
+    width: 40,
+    height: 40,
   },
   titleTextField: {
     width: "83%",
@@ -86,18 +87,9 @@ function TaskCreation(props) {
           className={(classes.margin, classes.titleTextField)}
         />
         <Zoom in={true} className={classes.fab}>
-          {props.isLoading ? (
-            <CircularProgress />
-          ) : (
-            <Fab
-              size="small"
-              color="primary"
-              aria-label="add"
-              onClick={addTask}
-            >
-              <AddIcon />
-            </Fab>
-          )}
+          <Fab size="small" color="primary" aria-label="add" onClick={addTask}>
+            <AddIcon />
+          </Fab>
         </Zoom>
       </form>
     </Container>
