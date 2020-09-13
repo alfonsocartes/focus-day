@@ -1,4 +1,15 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 import { connectToDatabase } from "../../../utils/dbConnect";
+
+/*
+ *
+ * Single Note API Dinamic Route (next.js)
+ * It's used to delete a note by ID
+ * The other methods are for future functionality
+ *
+ */
 
 export default async (req, res) => {
   const db = await connectToDatabase(process.env.MONGO_URI);
@@ -11,6 +22,7 @@ export default async (req, res) => {
   } = req;
 
   switch (method) {
+    // Not used in this app.
     case "GET":
       try {
         const note = await collection.find({ id: id });
@@ -22,7 +34,7 @@ export default async (req, res) => {
         res.status(400).json({ success: false });
       }
       break;
-
+    // Not used in this app.
     case "PUT":
       try {
         const note = await collection.updateOne({ id: id }, req.body, {

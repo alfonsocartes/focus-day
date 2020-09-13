@@ -1,11 +1,22 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 import { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
-import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
+import { makeStyles } from "@material-ui/core/styles";
 import { v4 as uuidv4 } from "uuid";
+
+/*
+ *
+ * Note Component.
+ * Component to add a new note: ID(UUID), Title and Content
+ * To see it in context, please take a look at /components/Notes.jsx
+ *
+ */
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,6 +65,7 @@ function NoteCreation(props) {
       ...note,
       id: id,
     };
+    //onAdd is a callback function from ToDoList component
     props.onAdd(newNote);
 
     setNote({

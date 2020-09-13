@@ -1,13 +1,23 @@
-import Notes from "./Notes";
-// import ToDoList from "./ToDoList";
-import { makeStyles } from "@material-ui/core/styles";
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
+import Link from "next/link";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Link from "next/link";
+import { makeStyles } from "@material-ui/core/styles";
+import Notes from "./Notes";
+// import ToDoList from "./ToDoList";
+
+/*
+ *
+ * Main container - body for the applications.
+ * It includes the Notes component and the ToDoList (tasks) component
+ *
+ */
 
 const drawerWidth = 330;
 

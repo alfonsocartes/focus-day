@@ -1,3 +1,6 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 import { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
@@ -6,6 +9,14 @@ import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import { v4 as uuidv4 } from "uuid";
+
+/*
+ *
+ * Task Component.
+ * Component to add a new task: ID(UUID), Text
+ * To see it in context, please take a look at /components/ToDoList.jsx
+ *
+ */
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,6 +60,7 @@ function TaskCreation(props) {
       id: id,
       checked: false,
     };
+    //onAdd is a callback function from ToDoList component
     props.onAdd(newTask);
     setTask({
       id: "",

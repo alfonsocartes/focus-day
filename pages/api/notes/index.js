@@ -1,5 +1,15 @@
-import Note from "../../../models/Note";
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 import { connectToDatabase } from "../../../utils/dbConnect";
+
+/*
+ *
+ * Notes API
+ * It's used to add notes (POST).
+ * The get Notes is not used. Please look at /api/index.js
+ *
+ */
 
 export default async (req, res) => {
   // Get a database connection, cached or otherwise,
@@ -11,6 +21,7 @@ export default async (req, res) => {
 
   const { method } = req;
   switch (method) {
+    // Not used. Please look at /api/index.js
     case "GET":
       try {
         const notes = await collection.find({}).toArray();
@@ -19,6 +30,7 @@ export default async (req, res) => {
         res.status(400).json({ success: false });
       }
       break;
+    // Add new note to Mongo DB
     case "POST":
       try {
         const note = await collection.insertOne(req.body);

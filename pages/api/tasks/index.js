@@ -1,8 +1,17 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 // import dbConnect from "../../../utils/dbConnect";
 import Task from "../../../models/Task";
 // import { connectToDatabase } from "../../../utils/dbConnect";
 
-// dbConnect();
+/*
+ *
+ * Tasks API
+ * It's used to add tasks (POST).
+ * The get Tasks is not used. Please look at /api/index.js
+ *
+ */
 
 export default async (req, res) => {
   const { method } = req;

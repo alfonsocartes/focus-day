@@ -1,9 +1,21 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 import { useState } from "react";
-import Note from "./Note";
-import NoteCreation from "./NoteCreation";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import Note from "./Note";
+import NoteCreation from "./NoteCreation";
+
+/*
+ *
+ * Notes component, includes:
+ * - Note creation component
+ * - Notes grid
+ * - CRUD UI controller functions
+ *
+ */
 
 const useStyles = makeStyles((theme) => ({
   noteGrid: {
@@ -34,6 +46,7 @@ function Notes(props) {
 
   const [notes, setNotes] = useState(props.notes);
 
+  // Function to add a Note to database using API Routes
   async function addNoteDB(newNote) {
     try {
       const res = await fetch("/api/notes", {
@@ -51,6 +64,7 @@ function Notes(props) {
     }
   }
 
+  // Function to add a Note notes state array and Database.
   async function addNote(newNote) {
     if (newNote.title && newNote.content) {
       const status = await addNoteDB(newNote);
@@ -68,8 +82,8 @@ function Notes(props) {
     }
   }
 
+  // Function to delete a note from DB using the ID
   async function deleteNoteDB(id) {
-    console.log(id);
     try {
       const res = await fetch(`/api/notes/${id}`, {
         method: "DELETE",

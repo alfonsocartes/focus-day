@@ -1,6 +1,7 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 import { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TaskCreation from "./TaskCreation";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -9,17 +10,25 @@ import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
+import { makeStyles } from "@material-ui/core/styles";
+import TaskCreation from "./TaskCreation";
+
+/*
+ *
+ * ToDoList component, includes:
+ * - Task creation component
+ * - Task grid
+ * - CRUD UI controller functions
+ *
+ */
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
   },
-
   fab: {
     position: "absolute",
-    // top: theme.spacing(3),
     right: theme.spacing(4),
-    //margin: theme.spacing(4),
   },
 }));
 
@@ -29,10 +38,16 @@ function ToDoList(props) {
   // const testingData = [
   //   "Welcome to your todolist!",
   //   "Hit the + button to add a new item.",
-  //   "<-- Hit this to delete an item.",
+  //   "<-- Hit this to complete an item.",
   // ];
 
   const [tasks, setTasks] = useState(props.tasks);
+
+  /*
+   *
+   * Add to state (React Hooks) and to DB
+   *
+   */
 
   async function addTaskDB(newTask) {
     try {
@@ -59,6 +74,82 @@ function ToDoList(props) {
     }
   }
 
+  /*
+   *
+   * Checked status state (React Hooks)
+   *
+   */
+
+  async function toggleCheckedStatusDB(task) {
+    try {
+      const res = await fetch(`/api/tasks/${task.id}`, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // Initial array of checked items for the React Hooks checked state
+  const initialChecked = [];
+  tasks.map((task) => {
+    if (task.checked) {
+      initialChecked.push(task.id);
+    }
+  });
+
+  const [checked, setChecked] = useState(initialChecked);
+
+  function handleCheckedList(task) {
+    const currentIndex = checked.indexOf(task.id);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(task.id);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  }
+
+  /*
+   *
+   * Handlers for checked tasks state (React Hooks)
+   *
+   */
+
+  function handleModel(task) {
+    const currentTasksIndex = tasks.indexOf(task);
+    const newTasks = [...tasks];
+
+    newTasks[currentTasksIndex] = {
+      ...newTasks[currentTasksIndex],
+      checked: !newTasks[currentTasksIndex].checked,
+    };
+
+    setTasks(newTasks);
+
+    task.checked = !task.checked;
+    toggleCheckedStatusDB(task);
+  }
+
+  const handleToggle = (task) => () => {
+    handleCheckedList(task);
+    handleModel(task);
+  };
+
+  /*
+   *
+   * Delete from state (React Hooks) and from DB
+   *
+   */
+
   async function deleteTaskDB(id) {
     try {
       const res = await fetch(`/api/tasks/${id}`, {
@@ -82,63 +173,7 @@ function ToDoList(props) {
     deleteTaskDB(id);
   }
 
-  async function toggleCheckedStatusDB(task) {
-    try {
-      const res = await fetch(`/api/tasks/${task.id}`, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(task),
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const initialChecked = [];
-  tasks.map((task) => {
-    if (task.checked) {
-      initialChecked.push(task.id);
-    }
-  });
-
-  const [checked, setChecked] = useState(initialChecked);
-
-  function handleCheckedList(task) {
-    const currentIndex = checked.indexOf(task.id);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(task.id);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  }
-
-  function handleModel(task) {
-    const currentTasksIndex = tasks.indexOf(task);
-    const newTasks = [...tasks];
-
-    newTasks[currentTasksIndex] = {
-      ...newTasks[currentTasksIndex],
-      checked: !newTasks[currentTasksIndex].checked,
-    };
-
-    setTasks(newTasks);
-
-    task.checked = !task.checked;
-    toggleCheckedStatusDB(task);
-  }
-
-  const handleToggle = (task) => () => {
-    handleCheckedList(task);
-    handleModel(task);
-  };
-
+  // Removes all the checked items from the state array and DB
   function clearChecked() {
     checked.map((taskID) => console.log("clearChecked taskID " + taskID));
 

@@ -1,7 +1,16 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 // import dbConnect from "../../../utils/dbConnect";
 import Task from "../../../models/Task";
 
-// dbConnect();
+/*
+ *
+ * Single Task API Dinamic Route (next.js)
+ * It's used to delete a Task by ID
+ * The other methods are for future functionality
+ *
+ */
 
 export default async (req, res) => {
   const {

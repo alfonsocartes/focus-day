@@ -1,6 +1,15 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 import useSWR from "swr";
 import App from "../components/App";
 import Layout from "../components/Layout";
+
+/*
+ *
+ * Main entry point for the application
+ *
+ */
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 

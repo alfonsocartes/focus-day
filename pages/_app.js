@@ -5,6 +5,13 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 
+/*
+ *
+ * MATERIAL-UI
+ * This doument is used for CSS server rendering for Material-UI.
+ *
+ */
+
 export default function MyApp(props) {
   const { Component, pageProps } = props;
 

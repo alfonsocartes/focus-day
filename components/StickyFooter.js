@@ -1,12 +1,18 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 import React from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
+import { makeStyles } from "@material-ui/core/styles";
 
-const currentYear = new Date().getFullYear;
-const logoPath = "/Logo cartes.dev small.jpg";
+/*
+ *
+ * StickyFooter Component.
+ * To see it in context, please take a look at the Layout component
+ *
+ */
 
 function Copyright() {
   return (

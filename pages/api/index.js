@@ -1,15 +1,14 @@
-// import dbConnect from "../../utils/dbConnect";
-import Note from "../../models/Note";
-// import Task from "../../models/Task";
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 import { connectToDatabase } from "../../utils/dbConnect";
 
-// dbConnect();
-
-// export default async function handler(req, res) {
-//   const notes = await Note.find({});
-//   const tasks = await Task.find({});
-//   res.status(200).json({ notes: notes, tasks: tasks });
-// }
+/*
+ *
+ * Mongo DB connection.
+ * This document is for getting the initial props for the App component using NextJS API Routing
+ *
+ */
 
 // The main, exported, function of the endpoint,
 // dealing with the request and subsequent response

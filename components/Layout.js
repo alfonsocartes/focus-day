@@ -1,9 +1,19 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 import React from "react";
 import Head from "next/head";
-import StickyFooter from "./StickyFooter";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
+import StickyFooter from "./StickyFooter";
+
+/*
+ *
+ * Layout Component.
+ * To see it in context, please take a look at /index.js and /about.js
+ *
+ */
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,10 +21,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     minHeight: "100vh",
   },
-  // main: {
-  //   marginTop: theme.spacing(8),
-  //   marginBottom: theme.spacing(2),
-  // },
   footer: {
     padding: theme.spacing(3, 2),
     marginTop: "auto",

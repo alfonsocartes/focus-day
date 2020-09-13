@@ -1,13 +1,21 @@
-import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
+import Link from "next/link";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import Link from "next/link";
+import { makeStyles } from "@material-ui/core/styles";
 import Layout from "../components/Layout";
+
+/*
+ *
+ * About Page (links to GitHub and some explanation of the app)
+ *
+ */
 
 const drawerWidth = 330;
 

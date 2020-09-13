@@ -1,4 +1,15 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 const mongoose = require("mongoose");
+
+/*
+ *
+ * Mongoose Note Model.
+ * It's not going to be used in this app.
+ * Please take a look at /api/index.js. It's works better with Vercel.
+ *
+ */
 
 const noteSchema = {
   id: {

@@ -1,11 +1,22 @@
+//  Created by Alfonso Cartes.
+//  Copyright © Alfonso Cartes. All rights reserved.
+
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import { red } from "@material-ui/core/colors";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import { red } from "@material-ui/core/colors";
+
+/*
+ *
+ * Note Component.
+ * A single Material-UI card component
+ * To see it in context, please take a look at /components/Notes.jsx
+ *
+ */
 
 const useStyles = makeStyles((theme) => ({
   root: {
