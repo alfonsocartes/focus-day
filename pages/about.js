@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    marginBottom: theme.spacing(3),
   },
   content: {
     flexGrow: 1,
@@ -78,7 +79,7 @@ export default function About() {
             <Typography variant="h4" content="h1" className={classes.title}>
               About FocusDay
             </Typography>
-            <Typography variant="body2" content="p" className={classes.title}>
+            <div>
               <p>
                 FocusDay is a DEMO web app to showcase web development
                 technologies such as:
@@ -106,11 +107,14 @@ export default function About() {
               </p>
               <p>
                 The source code for the app can be found on{" "}
-                <a target="_blank" href="">
+                <a
+                  target="_blank"
+                  href="https://github.com/alfonsocartes/focus-day"
+                >
                   Github
                 </a>
               </p>
-            </Typography>
+            </div>
           </main>
         </Container>
       </div>
