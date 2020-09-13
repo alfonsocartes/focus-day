@@ -59,18 +59,26 @@ function ToDoList(props) {
         },
         body: JSON.stringify(newTask),
       });
+      console.log("POST STATUS " + res.status);
+      return res.status;
     } catch (error) {
       console.log(error);
     }
   }
-  function addTask(newTask) {
+  async function addTask(newTask) {
     if (newTask) {
-      addTaskDB(newTask);
-      setTasks((prevTasks) => {
-        return [...prevTasks, newTask];
-      });
+      const status = await addTaskDB(newTask);
+      if (status !== 201) {
+        console.log("addTaskDB " + newTask.text + " FAILURE " + status);
+        alert("Error: could not add to database.");
+        return;
+      } else {
+        setTasks((prevTasks) => {
+          return [...prevTasks, newTask];
+        });
+      }
     } else {
-      alert("Task cannot be empty.");
+      alert("Task field cannot be empty.");
     }
   }
 
@@ -90,6 +98,8 @@ function ToDoList(props) {
         },
         body: JSON.stringify(task),
       });
+      console.log("PUT STATUS " + res.status);
+      return res.status;
     } catch (error) {
       console.log(error);
     }
@@ -124,19 +134,25 @@ function ToDoList(props) {
    *
    */
 
-  function handleModel(task) {
-    const currentTasksIndex = tasks.indexOf(task);
-    const newTasks = [...tasks];
-
-    newTasks[currentTasksIndex] = {
-      ...newTasks[currentTasksIndex],
-      checked: !newTasks[currentTasksIndex].checked,
-    };
-
-    setTasks(newTasks);
-
+  async function handleModel(task) {
     task.checked = !task.checked;
-    toggleCheckedStatusDB(task);
+
+    const status = await toggleCheckedStatusDB(task);
+    if (status !== 201) {
+      console.log("toggleCheckedStatusDB " + task.text + " FAILURE " + status);
+      alert("Error: could not modify on database.");
+      return;
+    } else {
+      const currentTasksIndex = tasks.indexOf(task);
+      const newTasks = [...tasks];
+
+      newTasks[currentTasksIndex] = {
+        ...newTasks[currentTasksIndex],
+        checked: !newTasks[currentTasksIndex].checked,
+      };
+
+      setTasks(newTasks);
+    }
   }
 
   const handleToggle = (task) => () => {
@@ -164,13 +180,19 @@ function ToDoList(props) {
     }
   }
 
-  function deleteTask(id) {
-    setTasks((prevTasks) => {
-      return prevTasks.filter((task) => {
-        return task.id !== id;
+  async function deleteTask(id) {
+    const status = await deleteTaskDB(id);
+    if (status !== 201) {
+      console.log("deleteTaskDB " + id + " FAILURE " + status);
+      alert("Error: could not remove from database.");
+      return;
+    } else {
+      setTasks((prevTasks) => {
+        return prevTasks.filter((task) => {
+          return task.id !== id;
+        });
       });
-    });
-    deleteTaskDB(id);
+    }
   }
 
   // Removes all the checked items from the state array and DB

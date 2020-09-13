@@ -63,7 +63,6 @@ function Notes(props) {
         },
         body: JSON.stringify(newNote),
       });
-      console.log("POST STATUS " + res.status);
       return res.status;
     } catch (error) {
       console.log(error);
@@ -109,13 +108,19 @@ function Notes(props) {
     }
   }
 
-  function deleteNote(id) {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((note) => {
-        return note.id !== id;
+  async function deleteNote(id) {
+    const status = await deleteNoteDB(id);
+    if (status !== 201) {
+      console.log("deleteNoteDB  " + id + " FAILURE " + status);
+      alert("Error: could not remove from database.");
+      return;
+    } else {
+      setNotes((prevNotes) => {
+        return prevNotes.filter((note) => {
+          return note.id !== id;
+        });
       });
-    });
-    deleteNoteDB(id);
+    }
   }
 
   return (
