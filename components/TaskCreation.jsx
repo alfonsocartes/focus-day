@@ -2,11 +2,12 @@
 //  Copyright © Alfonso Cartes. All rights reserved.
 
 import { useState } from "react";
-import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
+import AddIcon from "@material-ui/icons/Add";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import { v4 as uuidv4 } from "uuid";
 
@@ -36,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 function TaskCreation(props) {
   const classes = useStyles();
+
   const [task, setTask] = useState({
     id: "",
     checked: false,
@@ -84,9 +86,18 @@ function TaskCreation(props) {
           className={(classes.margin, classes.titleTextField)}
         />
         <Zoom in={true} className={classes.fab}>
-          <Fab size="small" color="primary" aria-label="add" onClick={addTask}>
-            <AddIcon />
-          </Fab>
+          {props.isLoading ? (
+            <CircularProgress />
+          ) : (
+            <Fab
+              size="small"
+              color="primary"
+              aria-label="add"
+              onClick={addTask}
+            >
+              <AddIcon />
+            </Fab>
+          )}
         </Zoom>
       </form>
     </Container>

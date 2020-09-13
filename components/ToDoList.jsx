@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import TaskCreation from "./TaskCreation";
 
@@ -41,6 +42,8 @@ function ToDoList(props) {
   //   "<-- Hit this to complete an item.",
   // ];
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [tasks, setTasks] = useState(props.tasks);
 
   /*
@@ -66,7 +69,9 @@ function ToDoList(props) {
   }
   async function addTask(newTask) {
     if (newTask) {
+      setIsLoading(true);
       const status = await addTaskDB(newTask);
+      setIsLoading(false);
       if (status !== 201) {
         console.log("addTaskDB " + newTask.text + " FAILURE " + status);
         alert("Error: could not add to database.");
@@ -134,8 +139,10 @@ function ToDoList(props) {
 
   async function handleModel(task) {
     task.checked = !task.checked;
-
+    setIsLoading(true);
     const status = await toggleCheckedStatusDB(task);
+    setIsLoading(false);
+
     if (status !== 204) {
       console.log("toggleCheckedStatusDB " + task.text + " FAILURE " + status);
       alert("Error: could not modify on database.");
@@ -179,7 +186,10 @@ function ToDoList(props) {
   }
 
   async function deleteTask(id) {
+    setIsLoading(true);
     const status = await deleteTaskDB(id);
+    setIsLoading(false);
+
     if (status === 400) {
       console.log("deleteTaskDB " + id + " FAILURE " + status);
       alert("Error: could not remove from database.");
@@ -206,7 +216,8 @@ function ToDoList(props) {
       <Typography variant="h6" component="h2">
         To-Do List
       </Typography>
-      <TaskCreation onAdd={addTask} />
+
+      <TaskCreation onAdd={addTask} isLoading={isLoading} />
       <div>
         <List className={classes.root}>
           {tasks.map((task, index) => {
