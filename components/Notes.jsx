@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Note from "./Note";
 import NoteCreation from "./NoteCreation";
 
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Notes(props) {
   const classes = useStyles();
+
+  const [isLoading, setIsLoading] = useState(false);
+
   // const testingData = [
   //   {
   //     title: "Test 0",
@@ -72,7 +76,10 @@ function Notes(props) {
   // Function to add a Note notes state array and Database.
   async function addNote(newNote) {
     if (newNote.title && newNote.content) {
+      setIsLoading(true);
       const status = await addNoteDB(newNote);
+      setIsLoading(false);
+
       if (status !== 201) {
         console.log("addNoteDB " + newNote.title + " FAILURE " + status);
         alert("Error: could not add to database.");
@@ -109,7 +116,10 @@ function Notes(props) {
   }
 
   async function deleteNote(id) {
+    setIsLoading(true);
     const status = await deleteNoteDB(id);
+    setIsLoading(false);
+
     if (status !== 200) {
       console.log("deleteNoteDB  " + id + " FAILURE " + status);
       alert("Error: could not remove from database.");
@@ -125,9 +135,14 @@ function Notes(props) {
 
   return (
     <div>
-      <Typography variant="h6" component="h2">
-        Notes
-      </Typography>
+      <Grid container direction="row" justify="space-between">
+        <Grid item>
+          <Typography variant="h6" component="h2">
+            Notes
+          </Typography>
+        </Grid>
+        <Grid item>{isLoading && <CircularProgress />}</Grid>
+      </Grid>
       <NoteCreation onAdd={addNote} />
       <div className={classes.noteGrid}>
         <Grid

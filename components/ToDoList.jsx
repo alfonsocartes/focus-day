@@ -10,7 +10,6 @@ import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import TaskCreation from "./TaskCreation";
 
@@ -36,13 +35,13 @@ const useStyles = makeStyles((theme) => ({
 function ToDoList(props) {
   const classes = useStyles();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   // const testingData = [
   //   "Welcome to your todolist!",
   //   "Hit the + button to add a new item.",
   //   "<-- Hit this to complete an item.",
   // ];
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const [tasks, setTasks] = useState(props.tasks);
 
