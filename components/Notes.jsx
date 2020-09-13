@@ -46,6 +46,12 @@ function Notes(props) {
 
   const [notes, setNotes] = useState(props.notes);
 
+  /*
+   *
+   * Add to state (React Hooks) and to DB
+   *
+   */
+
   // Function to add a Note to database using API Routes
   async function addNoteDB(newNote) {
     try {
@@ -81,6 +87,12 @@ function Notes(props) {
       alert("Note title and content are required.");
     }
   }
+
+  /*
+   *
+   * Delete from state (React Hooks) and from DB
+   *
+   */
 
   // Function to delete a note from DB using the ID
   async function deleteNoteDB(id) {
