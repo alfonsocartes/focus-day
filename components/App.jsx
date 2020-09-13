@@ -75,7 +75,7 @@ function App(props) {
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
-          <ToDoList tasks={props.tasks} />
+          {/* <ToDoList tasks={props.tasks} /> */}
         </div>
       </Drawer>
       <main className={classes.content}>

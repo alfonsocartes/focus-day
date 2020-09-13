@@ -12,7 +12,8 @@ export default function Index() {
 
   return (
     <Layout>
-      <App notes={data.notes} tasks={data.tasks} />
+      {/* <App notes={data.notes} tasks={data.tasks} /> */}
+      <App notes={data.notes} />
     </Layout>
   );
 }

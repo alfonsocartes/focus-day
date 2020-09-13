@@ -1,1 +1,7 @@
-{}
+{
+  "name": "focus-day",
+  "version": 2,
+  "env": {
+    "MONGO_URI": "mongodb+srv://admin-alfonso:105Fca82!!@focusdaycluster.ojhvj.mongodb.net/FocusDayDB?retryWrites=true&w=majority"
+  }
+}
