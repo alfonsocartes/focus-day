@@ -75,6 +75,7 @@ function Notes(props) {
 
   // Function to add a Note notes state array and Database.
   async function addNote(newNote) {
+    //TODO: for better UX and speed first update the UI and then save to DB. If there's an error, revert back and show dialog
     if (newNote.title && newNote.content) {
       setIsLoading(true);
       const status = await addNoteDB(newNote);
@@ -116,6 +117,7 @@ function Notes(props) {
   }
 
   async function deleteNote(id) {
+    //TODO: for better UX and speed first update the UI and then save to DB. If there's an error, revert back and show dialog
     setIsLoading(true);
     const status = await deleteNoteDB(id);
     setIsLoading(false);

@@ -74,6 +74,7 @@ function Tasks(props) {
   }
   async function addTask(newTask) {
     if (newTask) {
+      //TODO: for better UX and speed first update the UI and then save to DB. If there's an error, revert back and show dialog
       setIsLoading(true);
       const status = await addTaskDB(newTask);
       setIsLoading(false);
@@ -144,6 +145,7 @@ function Tasks(props) {
 
   async function handleModel(task) {
     task.checked = !task.checked;
+    //TODO: for better UX and speed first update the UI and then save to DB. If there's an error, revert back and show dialog
     setIsLoading(true);
     const status = await toggleCheckedStatusDB(task);
     setIsLoading(false);
@@ -191,6 +193,7 @@ function Tasks(props) {
   }
 
   async function deleteTask(id) {
+    //TODO: for better UX and speed first update the UI and then save to DB. If there's an error, revert back and show dialog
     setIsLoading(true);
     const status = await deleteTaskDB(id);
     setIsLoading(false);
