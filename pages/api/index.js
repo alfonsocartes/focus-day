@@ -1,4 +1,4 @@
-//import dbConnect from "../../utils/dbConnect";
+// import dbConnect from "../../utils/dbConnect";
 import Note from "../../models/Note";
 // import Task from "../../models/Task";
 import { connectToDatabase } from "../../utils/dbConnect";
@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
   // Select the "notes" collection from the database
   const collection = await db.collection("notes");
 
-  // Select the users collection from the database
+  // Select the notes collection from the database
   const notes = await collection.find({}).toArray();
 
   // Respond with a JSON string of all users in the collection

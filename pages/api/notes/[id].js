@@ -1,9 +1,10 @@
-// import dbConnect from "../../../utils/dbConnect";
-import Note from "../../../models/Note";
-
-// dbConnect();
+import { connectToDatabase } from "../../../utils/dbConnect";
 
 export default async (req, res) => {
+  const db = await connectToDatabase(process.env.MONGO_URI);
+
+  const collection = await db.collection("notes");
+
   const {
     query: { id },
     method,
@@ -12,7 +13,7 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const note = await Note.findOne({ id: id });
+        const note = await collection.find({ id: id });
         if (!note) {
           return res.status(400).json({ success: false });
         }
@@ -24,7 +25,7 @@ export default async (req, res) => {
 
     case "PUT":
       try {
-        const note = await Note.findOneAndUpdate({ id: id }, req.body, {
+        const note = await collection.updateOne({ id: id }, req.body, {
           new: true,
           runValidators: true,
         });
@@ -39,7 +40,7 @@ export default async (req, res) => {
 
     case "DELETE":
       try {
-        const deletedNote = await Note.deleteOne({
+        const deletedNote = await collection.deleteOne({
           id: id,
         });
         if (!deletedNote) {

@@ -44,17 +44,25 @@ function Notes(props) {
         },
         body: JSON.stringify(newNote),
       });
+      console.log("POST STATUS " + res.status);
+      return res.status;
     } catch (error) {
       console.log(error);
     }
   }
 
-  function addNote(newNote) {
+  async function addNote(newNote) {
     if (newNote.title && newNote.content) {
-      addNoteDB(newNote);
-      setNotes((prevNotes) => {
-        return [...prevNotes, newNote];
-      });
+      const status = await addNoteDB(newNote);
+      if (status !== 201) {
+        console.log("addNoteDB " + newNote.title + " FAILURE " + status);
+        alert("Error: could not add to database.");
+        return;
+      } else {
+        setNotes((prevNotes) => {
+          return [...prevNotes, newNote];
+        });
+      }
     } else {
       alert("Note title and content are required.");
     }
@@ -89,7 +97,7 @@ function Notes(props) {
       <Typography variant="h6" component="h2">
         Notes
       </Typography>
-      {/* <NoteCreation onAdd={addNote} /> */}
+      <NoteCreation onAdd={addNote} />
       <div className={classes.noteGrid}>
         <Grid
           container
