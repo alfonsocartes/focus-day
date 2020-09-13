@@ -138,7 +138,7 @@ function ToDoList(props) {
     task.checked = !task.checked;
 
     const status = await toggleCheckedStatusDB(task);
-    if (status !== 201) {
+    if (status !== 204) {
       console.log("toggleCheckedStatusDB " + task.text + " FAILURE " + status);
       alert("Error: could not modify on database.");
       return;
@@ -182,7 +182,7 @@ function ToDoList(props) {
 
   async function deleteTask(id) {
     const status = await deleteTaskDB(id);
-    if (status !== 201) {
+    if (status !== 200) {
       console.log("deleteTaskDB " + id + " FAILURE " + status);
       alert("Error: could not remove from database.");
       return;

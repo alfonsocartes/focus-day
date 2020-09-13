@@ -44,7 +44,7 @@ export default async (req, res) => {
         if (!note) {
           return res.status(400).json({ success: false });
         }
-        res.status(200).json({ success: true, noteData: note });
+        res.status(204).json({ success: true, noteData: note });
       } catch (error) {
         res.status(400).json({ success: false });
       }

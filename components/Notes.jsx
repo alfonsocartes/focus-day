@@ -110,7 +110,7 @@ function Notes(props) {
 
   async function deleteNote(id) {
     const status = await deleteNoteDB(id);
-    if (status !== 201) {
+    if (status !== 200) {
       console.log("deleteNoteDB  " + id + " FAILURE " + status);
       alert("Error: could not remove from database.");
       return;
