@@ -75,23 +75,24 @@ function TaskCreation(props) {
   }
 
   return (
+    // TODO: add when pressing enter
     <Container component="main" maxWidth="xs">
-      <form noValidate autoComplete="off">
-        <TextField
-          variant="outlined"
-          margin="normal"
-          name="text"
-          onChange={handleChange}
-          value={task.text}
-          placeholder="New ToDo"
-          className={(classes.margin, classes.titleTextField)}
-        />
-        <Zoom in={true} className={classes.fab}>
-          <Fab size="small" color="primary" aria-label="add" onClick={addTask}>
-            <AddIcon />
-          </Fab>
-        </Zoom>
-      </form>
+      {/* <form noValidate autoComplete="off"> */}
+      <TextField
+        variant="outlined"
+        margin="normal"
+        name="text"
+        onChange={handleChange}
+        value={task.text}
+        placeholder="New ToDo"
+        className={(classes.margin, classes.titleTextField)}
+      />
+      <Zoom in={true} className={classes.fab}>
+        <Fab size="small" color="primary" aria-label="add" onClick={addTask}>
+          <AddIcon />
+        </Fab>
+      </Zoom>
+      {/* </form> */}
     </Container>
   );
 }

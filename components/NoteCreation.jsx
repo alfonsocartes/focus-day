@@ -83,44 +83,45 @@ function NoteCreation(props) {
   }
 
   return (
+    // TODO: add when pressing enter
     <Container component="main" maxWidth="xs">
-      <form noValidate autoComplete="off">
-        {isExpanded && (
-          <TextField
-            className={classes.titleTextField}
-            variant="outlined"
-            margin="normal"
-            //fullWidth
-            name="title"
-            onChange={handleChange}
-            value={note.title}
-            placeholder="Title"
-          />
-        )}
-        <Zoom in={isExpanded}>
-          <Fab
-            className={classes.fab}
-            size="small"
-            color="primary"
-            aria-label="add"
-            onClick={addNote}
-          >
-            <AddIcon />
-          </Fab>
-        </Zoom>
+      {/* <form noValidate autoComplete="off"> */}
+      {isExpanded && (
         <TextField
+          className={classes.titleTextField}
           variant="outlined"
           margin="normal"
-          fullWidth
-          name="content"
-          onClick={expand}
+          //fullWidth
+          name="title"
           onChange={handleChange}
-          value={note.content}
-          placeholder="Add a note..."
-          multiline={isExpanded}
-          rows={isExpanded ? 5 : 1}
+          value={note.title}
+          placeholder="Title"
         />
-      </form>
+      )}
+      <Zoom in={isExpanded}>
+        <Fab
+          className={classes.fab}
+          size="small"
+          color="primary"
+          aria-label="add"
+          onClick={addNote}
+        >
+          <AddIcon />
+        </Fab>
+      </Zoom>
+      <TextField
+        variant="outlined"
+        margin="normal"
+        fullWidth
+        name="content"
+        onClick={expand}
+        onChange={handleChange}
+        value={note.content}
+        placeholder="Add a note..."
+        multiline={isExpanded}
+        rows={isExpanded ? 5 : 1}
+      />
+      {/* </form> */}
     </Container>
   );
 }
