@@ -5,7 +5,6 @@ import Link from "next/link";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -68,7 +67,7 @@ export default function Loading() {
             content="h2"
             className={classes.contentTitle}
           >
-            Please whait while whe data is loading...
+            Please whait while the data is loading from MongoDB Atlas...
           </Typography>
           <CircularProgress />
         </main>

@@ -36,7 +36,7 @@ export default function Layout({ children }) {
   return (
     <div className={classes.root}>
       <Head>
-        <title>Focus Day</title>
+        <title>FocusDay</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CssBaseline />
