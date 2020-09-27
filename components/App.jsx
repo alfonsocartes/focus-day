@@ -146,6 +146,7 @@ function App(props) {
           [classes.contentShift]: open,
         })}
       >
+        <Toolbar />
         <Notes notes={props.notes} />
       </main>
     </div>

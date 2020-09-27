@@ -36,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     width: 40,
     height: 40,
   },
+  heading: {
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(3),
+  },
 }));
 
 function Tasks(props) {
@@ -222,7 +226,7 @@ function Tasks(props) {
   return (
     <div>
       <Grid container direction="row" justify="space-between">
-        <Grid item>
+        <Grid item className={classes.heading}>
           <Typography variant="h6" component="h2">
             To-Do List
           </Typography>
