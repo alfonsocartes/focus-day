@@ -20,15 +20,15 @@ function Copyright() {
       {"Copyright © "}
       {new Date().getFullYear()}{" "}
       <Link color="inherit" href="https://www.cartes.dev/">
-        Alfonso Cartes Guilarte (cartes.dev)
+        Alfonso Cartes Guilarte
       </Link>
     </Typography>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
-  logo: {
-    height: 50,
+  paddingDrawer: {
+    paddingLeft: 300,
   },
 }));
 
@@ -36,7 +36,7 @@ export default function StickyFooter() {
   const classes = useStyles();
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" className={classes.paddingDrawer}>
       <Copyright />
     </Container>
   );
