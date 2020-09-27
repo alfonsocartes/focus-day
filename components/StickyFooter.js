@@ -5,7 +5,6 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-import { makeStyles } from "@material-ui/core/styles";
 
 /*
  *
@@ -26,17 +25,9 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  paddingDrawer: {
-    paddingLeft: 300,
-  },
-}));
-
 export default function StickyFooter() {
-  const classes = useStyles();
-
   return (
-    <Container maxWidth="sm" className={classes.paddingDrawer}>
+    <Container maxWidth="sm">
       <Copyright />
     </Container>
   );
