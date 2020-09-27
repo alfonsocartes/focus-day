@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
       theme.palette.type === "light"
         ? theme.palette.grey[100]
         : theme.palette.grey[800],
+    alignItems: "right",
   },
 }));
 
@@ -36,7 +37,7 @@ export default function Layout({ children }) {
   return (
     <div className={classes.root}>
       <Head>
-        <title>FocusDay</title>
+        <title>FocusDay - Take Notes and add TODOs</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CssBaseline />

@@ -3,6 +3,7 @@
 
 import React from "react";
 import clsx from "clsx";
+import Link from "next/link";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,6 +11,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -81,6 +83,9 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  aboutButton: {
+    marginLeft: "auto",
+  },
 }));
 
 function App(props) {
@@ -115,9 +120,15 @@ function App(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" content="h1" noWrap>
             FocusDay - Take Notes and add TODOs
           </Typography>
+
+          <Link href="/about">
+            <Button className={classes.aboutButton} color="inherit">
+              About
+            </Button>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
