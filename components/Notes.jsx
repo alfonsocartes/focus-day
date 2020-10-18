@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Note from "./Note";
 import NoteCreation from "./NoteCreation";
+import { add } from "date-fns";
 
 /*
  *
@@ -75,21 +76,21 @@ function Notes(props) {
 
   // Function to add a Note notes state array and Database.
   async function addNote(newNote) {
-    //TODO: for better UX and speed first update the UI and then save to DB. If there's an error, revert back and show dialog
     if (newNote.title && newNote.content) {
       setIsLoading(true);
+      setNotes((prevNotes) => {
+        return [...prevNotes, newNote];
+      });
       const status = await addNoteDB(newNote);
-      setIsLoading(false);
 
       if (status !== 201) {
         console.log("addNoteDB " + newNote.title + " FAILURE " + status);
         alert("Error: could not add to database.");
+        // If the note was not saved in the DB, remove from UI.
+        deleteNote(newNote);
         return;
-      } else {
-        setNotes((prevNotes) => {
-          return [...prevNotes, newNote];
-        });
       }
+      setIsLoading(false);
     } else {
       alert("Note title and content are required.");
     }
@@ -117,21 +118,24 @@ function Notes(props) {
   }
 
   async function deleteNote(id) {
-    //TODO: for better UX and speed first update the UI and then save to DB. If there's an error, revert back and show dialog
     setIsLoading(true);
+    const note = notes.find((note) => {
+      return note.id === id;
+    });
+    setNotes((prevNotes) => {
+      return prevNotes.filter((note) => {
+        return note.id !== id;
+      });
+    });
     const status = await deleteNoteDB(id);
     setIsLoading(false);
 
     if (status === 400) {
       console.log("deleteNoteDB  " + id + " FAILURE " + status);
       alert("Error: could not remove from database.");
+      // If the note was not deleted in the DB, add it back to the UI.
+      addNote(note);
       return;
-    } else {
-      setNotes((prevNotes) => {
-        return prevNotes.filter((note) => {
-          return note.id !== id;
-        });
-      });
     }
   }
 
