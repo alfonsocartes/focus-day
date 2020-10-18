@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     left: theme.spacing(1),
   },
   titleTextField: {
+    width: "100%",
+  },
+  contentTextField: {
     width: "85%",
   },
 }));
@@ -86,41 +89,44 @@ function NoteCreation(props) {
     // TODO: add when pressing enter
     <Container component="main" maxWidth="xs">
       {/* <form noValidate autoComplete="off"> */}
-      {isExpanded && (
-        <TextField
-          className={classes.titleTextField}
-          variant="outlined"
-          margin="normal"
-          //fullWidth
-          name="title"
-          onChange={handleChange}
-          value={note.title}
-          placeholder="Title"
-        />
-      )}
-      <Zoom in={isExpanded}>
-        <Fab
-          className={classes.fab}
-          size="small"
-          color="primary"
-          aria-label="add"
-          onClick={addNote}
-        >
-          <AddIcon />
-        </Fab>
-      </Zoom>
       <TextField
+        className={classes.titleTextField}
         variant="outlined"
         margin="normal"
-        fullWidth
-        name="content"
-        onClick={expand}
+        //fullWidth
+        name="title"
         onChange={handleChange}
-        value={note.content}
-        placeholder="Add a note..."
-        multiline={isExpanded}
-        rows={isExpanded ? 5 : 1}
+        value={note.title}
+        placeholder="Title"
+        onClick={expand}
       />
+      {isExpanded && (
+        <div>
+          <TextField
+            className={classes.contentTextField}
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            name="content"
+            onChange={handleChange}
+            value={note.content}
+            placeholder="Add a note..."
+            multiline={isExpanded}
+            rows={isExpanded ? 5 : 1}
+          />
+          <Zoom in={isExpanded}>
+            <Fab
+              className={classes.fab}
+              size="small"
+              color="primary"
+              aria-label="add"
+              onClick={addNote}
+            >
+              <AddIcon />
+            </Fab>
+          </Zoom>
+        </div>
+      )}
       {/* </form> */}
     </Container>
   );
