@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from "uuid";
  *
  * Task Component.
  * Component to add a new task: ID(UUID), Text
- * To see it in context, please take a look at /components/ToDoList.jsx
+ * To see it in context, please take a look at /components/Tasks.jsx
  *
  */
 
@@ -63,7 +63,7 @@ function TaskCreation(props) {
       id: id,
       checked: false,
     };
-    //onAdd is a callback function from ToDoList component
+    //onAdd is a callback function from Tasks component
     props.onAdd(newTask);
     setTask({
       id: "",
@@ -71,7 +71,14 @@ function TaskCreation(props) {
       text: "",
     });
 
-    event.preventDefault();
+    //event.preventDefault();
+  }
+
+  // Adds a new task when enter is pressed (it's an outside function just for code clarity)
+  function onKeyDown(event){
+    if(event.keyCode == 13) {
+      addTask();
+    }
   }
 
   return (
@@ -83,6 +90,7 @@ function TaskCreation(props) {
         margin="normal"
         name="text"
         onChange={handleChange}
+        onKeyDown={onKeyDown}
         value={task.text}
         placeholder="New ToDo"
         className={(classes.margin, classes.titleTextField)}
