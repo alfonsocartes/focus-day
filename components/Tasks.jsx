@@ -181,33 +181,35 @@ function Tasks(props) {
    *
    */
 
-  async function handleModel(task) {
+  async function handleChecked(task) {
     task.checked = !task.checked;
-    //TODO: for better UX and speed first update the UI and then save to DB. If there's an error, revert back and show dialog
+
     setIsLoading(true);
+
+    const currentTasksIndex = tasks.indexOf(task);
+    const newTasks = [...tasks];
+
+    newTasks[currentTasksIndex] = {
+      ...newTasks[currentTasksIndex],
+      checked: !newTasks[currentTasksIndex].checked,
+    };
+
+    setTasks(newTasks);
     const status = await toggleCheckedStatusDB(task);
+
     setIsLoading(false);
 
     if (status !== 204) {
       console.log("toggleCheckedStatusDB " + task.text + " FAILURE " + status);
       alert("Error: could not modify on database.");
+      handleChecked(task);
       return;
-    } else {
-      const currentTasksIndex = tasks.indexOf(task);
-      const newTasks = [...tasks];
-
-      newTasks[currentTasksIndex] = {
-        ...newTasks[currentTasksIndex],
-        checked: !newTasks[currentTasksIndex].checked,
-      };
-
-      setTasks(newTasks);
     }
   }
 
   const handleToggle = (task) => () => {
     handleCheckedList(task);
-    handleModel(task);
+    handleChecked(task);
   };
 
   /*
