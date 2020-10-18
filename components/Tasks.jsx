@@ -78,22 +78,56 @@ function Tasks(props) {
   }
   async function addTask(newTask) {
     if (newTask) {
-      //TODO: for better UX and speed first update the UI and then save to DB. If there's an error, revert back and show dialog
       setIsLoading(true);
+      setTasks((prevTasks) => {
+        return [...prevTasks, newTask];
+      });
       const status = await addTaskDB(newTask);
       setIsLoading(false);
       if (status !== 201) {
         console.log("addTaskDB " + newTask.text + " FAILURE " + status);
         alert("Error: could not add to database.");
+        deleteTask(newTask.id);
         return;
-      } else {
-        setTasks((prevTasks) => {
-          return [...prevTasks, newTask];
-        });
       }
     } else {
       alert("Task field cannot be empty.");
     }
+  }
+
+  async function deleteTaskDB(id) {
+    try {
+      const res = await fetch(`/api/tasks/${id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function deleteTask(id) {
+    setIsLoading(true);
+    const task = tasks.find((task) => {
+      return task.id === id;
+    });
+    setTasks((prevTasks) => {
+      return prevTasks.filter((task) => {
+        return task.id !== id;
+      });
+    });
+    const status = await deleteTaskDB(id);
+
+    if (status === 400) {
+      console.log("deleteTaskDB " + id + " FAILURE " + status);
+      alert("Error: could not remove from database.");
+      addTask(task);
+      return;
+    }
+    setIsLoading(false);
   }
 
   /*
@@ -181,39 +215,6 @@ function Tasks(props) {
    * Delete from state (React Hooks) and from DB
    *
    */
-
-  async function deleteTaskDB(id) {
-    try {
-      const res = await fetch(`/api/tasks/${id}`, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function deleteTask(id) {
-    //TODO: for better UX and speed first update the UI and then save to DB. If there's an error, revert back and show dialog
-    setIsLoading(true);
-    const status = await deleteTaskDB(id);
-    setIsLoading(false);
-
-    if (status === 400) {
-      console.log("deleteTaskDB " + id + " FAILURE " + status);
-      alert("Error: could not remove from database.");
-      return;
-    } else {
-      setTasks((prevTasks) => {
-        return prevTasks.filter((task) => {
-          return task.id !== id;
-        });
-      });
-    }
-  }
 
   // Removes all the checked items from the state array and DB
   function clearChecked() {
