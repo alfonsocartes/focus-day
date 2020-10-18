@@ -120,14 +120,13 @@ function Tasks(props) {
       });
     });
     const status = await deleteTaskDB(id);
-
+    setIsLoading(false);
     if (status === 400) {
       console.log("deleteTaskDB " + id + " FAILURE " + status);
       alert("Error: could not remove from database.");
       addTask(task);
       return;
     }
-    setIsLoading(false);
   }
 
   /*

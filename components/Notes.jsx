@@ -82,7 +82,7 @@ function Notes(props) {
         return [...prevNotes, newNote];
       });
       const status = await addNoteDB(newNote);
-
+      setIsLoading(false);
       if (status !== 201) {
         console.log("addNoteDB " + newNote.title + " FAILURE " + status);
         alert("Error: could not add to database.");
@@ -90,7 +90,6 @@ function Notes(props) {
         deleteNote(newNote);
         return;
       }
-      setIsLoading(false);
     } else {
       alert("Note title and content are required.");
     }
