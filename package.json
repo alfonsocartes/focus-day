@@ -10,10 +10,13 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "bcryptjs": "^2.4.3",
     "date-fns": "^2.16.1",
     "mongoose": "^5.10.9",
     "next": "9.5.4",
     "node-fetch": "^2.6.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "swr": "^0.3.5",
