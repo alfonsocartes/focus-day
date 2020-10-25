@@ -10,6 +10,7 @@ import App from "../components/App";
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import LogIn from "../components/LogIn";
 
 /*
  *
@@ -64,9 +65,10 @@ function Home() {
         )}
         {!loggedIn && (
           <>
-            <Link href="/login">Login</Link>
+            <LogIn />
+            {/* <Link href="/login">Login</Link>
             <p>or</p>
-            <Link href="/signup">Sign Up</Link>
+            <Link href="/signup">Sign Up</Link> */}
           </>
         )}
       </div>

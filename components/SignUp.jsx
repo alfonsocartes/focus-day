@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
+  avatarError: {
+    margin: theme.spacing(1),
+    backgroundColor: "red",
+  },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
@@ -44,39 +48,48 @@ export default function SignUp() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   function handleSubmit(e) {
+    function is_email(email) {
+      var emailReg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      return emailReg.test(email);
+    }
     e.preventDefault();
-    fetch("/api/authentication/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        if (data && data.error) {
-          setSignupError(data.message);
-        }
-        if (data && data.token) {
-          //set cookie
-          cookie.set("token", data.token, { expires: 2 });
-          Router.push("/");
-        }
-      });
+
+    if (is_email(email)) {
+      fetch("/api/authentication/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (data && data.error) {
+            setSignupError(data.message);
+          }
+          if (data && data.token) {
+            //set cookie
+            cookie.set("token", data.token, { expires: 2 });
+            Router.push("/");
+          }
+        });
+    } else {
+      setSignupError("Email not valid");
+    }
   }
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+        <Avatar className={signupError ? classes.avatarError : classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          {signupError ? signupError : "Sign Up"}
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -116,7 +129,7 @@ export default function SignUp() {
             value="Submit"
             className={classes.submit}
           >
-            {signupError ? "Error" : "Sign Up"}
+            Sign Up
           </Button>
           <Grid container justify="flex-start">
             <Grid item>
