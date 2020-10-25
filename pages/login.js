@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Router from "next/router";
 import cookie from "js-cookie";
 
+import LogIn from "../components/LogIn";
+import Layout from "../components/Layout";
+
 const Login = () => {
   const [loginError, setLoginError] = useState("");
   const [email, setEmail] = useState("");
@@ -35,23 +38,26 @@ const Login = () => {
       });
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <p>Login</p>
-      <input
-        name="email"
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        name="password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input type="submit" value="Submit" />
-      {loginError && <p style={{ color: "red" }}>{loginError}</p>}
-    </form>
+    <Layout>
+      <LogIn />
+      {/* <form onSubmit={handleSubmit}>
+        <p>Login</p>
+        <input
+          name="email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          name="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input type="submit" value="Submit" />
+        {loginError && <p style={{ color: "red" }}>{loginError}</p>}
+      </form> */}
+    </Layout>
   );
 };
 
