@@ -29,11 +29,5 @@ module.exports = async (req, res) => {
   // Select the tasks collection from the database
   const tasks = await tasksCollection.find({}).toArray();
 
-  // Select the "tasks" collection from the database
-  const usersCollection = await db.collection("users");
-
-  // Select the tasks collection from the database
-  const users = await usersCollection.find({}).toArray();
-
-  res.status(200).json({ notes, tasks, users });
+  res.status(200).json({ notes, tasks });
 };

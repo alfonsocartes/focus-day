@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import cookie from "js-cookie";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +36,31 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    fetch("/api/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (data && data.error) {
+          setSignupError(data.message);
+        }
+        if (data && data.token) {
+          //set cookie
+          cookie.set("token", data.token, { expires: 2 });
+          Router.push("/");
+        }
+      });
+  }
 
   return (
     <Container component="main" maxWidth="xs">
