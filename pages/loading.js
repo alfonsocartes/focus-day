@@ -6,6 +6,7 @@ import App from "../components/App";
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import Bar from "../components/Bar";
 
 /*
  *
@@ -21,12 +22,14 @@ export default function Index() {
   if (error)
     return (
       <Layout>
+        <Bar />
         <Error />
       </Layout>
     );
   if (!data)
     return (
       <Layout>
+        <Bar />
         <Loading />
       </Layout>
     );
