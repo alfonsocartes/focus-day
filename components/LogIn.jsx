@@ -15,22 +15,6 @@ import Container from "@material-ui/core/Container";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-function Default() {
-  return (
-    <div>
-      <Typography component="h6" variant="h6" align="center">
-        {"If you just want to test the app:"}
-      </Typography>
-      <Typography variant="body1" color="textSecondary" align="center">
-        {"email: test@test.com"}
-      </Typography>
-      <Typography variant="body1" color="textSecondary" align="center">
-        {"password: test"}
-      </Typography>
-    </div>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -42,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
+  avatarError: {
+    margin: theme.spacing(1),
+    backgroundColor: "red",
+  },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -49,7 +37,30 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  defaults: {
+    marginTop: theme.spacing(1),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+  },
 }));
+
+function Default() {
+  const classes = useStyles();
+  return (
+    <div className={classes.defaults}>
+      <Typography variant="h6" align="center">
+        {"If you just want to test the app:"}
+      </Typography>
+      <Typography variant="body1" align="center">
+        {"Email Address: test@test.com"}
+      </Typography>
+      <Typography variant="body1" align="center">
+        {"Password: test"}
+      </Typography>
+    </div>
+  );
+}
 
 export default function LogIn() {
   const classes = useStyles();
@@ -90,31 +101,12 @@ export default function LogIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+        <Avatar className={loginError ? classes.avatarError : classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          {loginError ? "Error" : "Sign In"}
         </Typography>
-
-        {/* <form onSubmit={handleSubmit}>
-        <p>Login</p>
-        <input
-          name="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          name="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input type="submit" value="Submit" />
-        {loginError && <p style={{ color: "red" }}>{loginError}</p>}
-      </form> */}
-
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -126,6 +118,8 @@ export default function LogIn() {
             name="email"
             autoComplete="email"
             type="email"
+            id="email"
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoFocus
@@ -151,7 +145,7 @@ export default function LogIn() {
             value="Submit"
             className={classes.submit}
           >
-            {loginError ? "Error" : "Sign In"}
+            Sign In
           </Button>
           <Grid container>
             <Grid item>
