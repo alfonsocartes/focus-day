@@ -6,8 +6,8 @@ import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 import Link from "next/link";
 import cookie from "js-cookie";
-import App from "../components/App";
 import Layout from "../components/Layout";
+import Bar from "../components/Bar";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 import LogIn from "../components/LogIn";
@@ -30,6 +30,7 @@ function Home() {
   if (error)
     return (
       <Layout>
+        <Bar />
         <Error />
       </Layout>
     );
@@ -37,6 +38,7 @@ function Home() {
   if (!data)
     return (
       <Layout>
+        <Bar />
         <Loading />
       </Layout>
     );
@@ -49,6 +51,7 @@ function Home() {
 
   return (
     <Layout>
+      <Bar />
       <div>
         {loggedIn && (
           <>
@@ -66,9 +69,6 @@ function Home() {
         {!loggedIn && (
           <>
             <LogIn />
-            {/* <Link href="/login">Login</Link>
-            <p>or</p>
-            <Link href="/signup">Sign Up</Link> */}
           </>
         )}
       </div>

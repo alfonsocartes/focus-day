@@ -15,9 +15,11 @@ import Container from "@material-ui/core/Container";
 
 import { makeStyles } from "@material-ui/core/styles";
 
+import Bar from "../components/Bar";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(12),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -83,7 +85,7 @@ export default function SignUp() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      <Bar />
       <div className={classes.paper}>
         <Avatar className={signupError ? classes.avatarError : classes.avatar}>
           <LockOutlinedIcon />
