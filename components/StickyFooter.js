@@ -5,6 +5,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
+import { makeStyles } from "@material-ui/core/styles";
 
 /*
  *
@@ -13,9 +14,21 @@ import Link from "@material-ui/core/Link";
  *
  */
 
+const useStyles = makeStyles((theme) => ({
+  alignment: {
+    padding: theme.spacing(1),
+    textAlign: "end",
+  },
+}));
+
 function Copyright() {
+  const classes = useStyles();
   return (
-    <Typography variant="body2" color="textSecondary">
+    <Typography
+      className={classes.alignment}
+      variant="body2"
+      color="textSecondary"
+    >
       {"Copyright © "}
       {new Date().getFullYear()}{" "}
       <Link color="inherit" href="https://www.cartes.dev/">
@@ -27,7 +40,7 @@ function Copyright() {
 
 export default function StickyFooter() {
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="xl">
       <Copyright />
     </Container>
   );
