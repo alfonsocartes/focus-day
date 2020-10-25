@@ -2,18 +2,18 @@
 //  Copyright © Alfonso Cartes. All rights reserved.
 
 import Layout from "../components/Layout";
-import SignIn from "../components/SignIn";
+import SignUp from "../components/SignUp";
 
 /*
  *
- * Login Page
+ * Sign Up
  *
  */
 
 export default function Login() {
   return (
     <Layout>
-      <SignIn />
+      <SignUp />
     </Layout>
   );
 }
