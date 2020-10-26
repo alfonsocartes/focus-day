@@ -5,15 +5,13 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.SECRET;
 
-const saltRounds = 10;
-
 function findUser(db, email, callback) {
   const collection = db.collection("users");
   collection.findOne({ email }, callback);
 }
 
 function authUser(db, email, password, hash, callback) {
-  const collection = db.collection("users");
+  // const collection = db.collection("users");
   bcrypt.compare(password, hash, callback);
 }
 
@@ -46,6 +44,7 @@ export default async (req, res) => {
             res.status(500).json({ error: true, message: "Auth Failed" });
           }
           if (match) {
+            // JSON Web Token creation
             const token = jwt.sign(
               { userId: user.userId, email: user.email },
               jwtSecret,

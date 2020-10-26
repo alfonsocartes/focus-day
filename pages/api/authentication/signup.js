@@ -8,13 +8,6 @@ const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.SECRET;
 
 const saltRounds = 10;
-// const url = process.env.MONGO_URI;
-// const dbName = "FocusDayDB";
-
-// const client = new MongoClient(url, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
 
 function findUser(db, email, callback) {
   const collection = db.collection("users");
@@ -32,7 +25,7 @@ function createUser(db, email, password, callback) {
         password: hash,
       },
       function (err, userCreated) {
-        assert.equal(err, null);
+        assert.strictEqual(err, null);
         callback(userCreated);
       }
     );
@@ -43,22 +36,17 @@ export default async (req, res) => {
   if (req.method === "POST") {
     // signup
     try {
-      assert.notEqual(null, req.body.email, "Email required");
-      assert.notEqual(null, req.body.password, "Password required");
+      assert.notStrictEqual(null, req.body.email, "Email required");
+      assert.notStrictEqual(null, req.body.password, "Password required");
     } catch (bodyError) {
       res.status(403).json({ error: true, message: bodyError.message });
     }
 
     const db = await connectToDatabase(process.env.MONGO_URI);
 
-    // verify email does not exist already
-    // client.connect(function (err) {
-    // assert.equal(null, err);
-    console.log("Connected to MongoDB server =>");
-    // const db = client.db(dbName);
     const email = req.body.email;
     const password = req.body.password;
-
+    // verify email does not exist already
     findUser(db, email, function (err, user) {
       if (err) {
         res.status(500).json({ error: true, message: "Error finding User" });
@@ -69,6 +57,7 @@ export default async (req, res) => {
         createUser(db, email, password, function (creationResult) {
           if (creationResult.ops.length === 1) {
             const user = creationResult.ops[0];
+            // JSON Web Token creation
             const token = jwt.sign(
               { userId: user.userId, email: user.email },
               jwtSecret,
@@ -86,9 +75,5 @@ export default async (req, res) => {
         return;
       }
     });
-    // });
-  } else {
-    // Handle any other HTTP method
-    res.status(200).json({ users: ["John Doe"] });
   }
 };
