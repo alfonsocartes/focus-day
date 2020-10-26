@@ -12,6 +12,10 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
+import Bar from "../components/Bar";
+import Layout from "../components/Layout";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -68,9 +72,15 @@ export default function LogIn() {
   const [loginError, setLoginError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    console.log("@@@@@@@ HANDLE SUBMIT EMAIL = " + email);
+
+    setIsLoading(true);
+
     //call api
     fetch("/api/authentication/login", {
       method: "POST",
@@ -91,74 +101,93 @@ export default function LogIn() {
         }
         if (data && data.token) {
           //set cookie
+          console.log("@@@@@@@ set cookie");
           cookie.set("token", data.token, { expires: 2 });
+          console.log("@@@@@@@ ROUTER PUSH");
           Router.push("/");
         }
       });
+
+    setIsLoading(false);
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={loginError ? classes.avatarError : classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          {loginError ? loginError : "Sign In"}
-        </Typography>
-        <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            type="email"
-            id="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            value="Submit"
-            className={classes.submit}
+    <Layout>
+      <Bar />
+
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          {isLoading ? (
+            <CircularProgress />
+          ) : (
+            <Avatar
+              className={loginError ? classes.avatarError : classes.avatar}
+            >
+              <LockOutlinedIcon />
+            </Avatar>
+          )}
+          <Typography component="h1" variant="h5">
+            {loginError ? loginError : "Sign In"}
+          </Typography>
+          <form
+            className={classes.form}
+            onSubmit={handleSubmit}
+            method="post"
+            action="/"
           >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              type="email"
+              id="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              value="Submit"
+              className={classes.submit}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item>
+                <Link href="/signup" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Default />
-      </Box>
-    </Container>
+          </form>
+        </div>
+        <Box mt={8}>
+          <Default />
+        </Box>
+      </Container>
+    </Layout>
   );
 }

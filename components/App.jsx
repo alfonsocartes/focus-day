@@ -4,6 +4,9 @@
 import React from "react";
 import clsx from "clsx";
 import Link from "next/link";
+
+import cookie from "js-cookie";
+
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,6 +19,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+
 import Notes from "./Notes";
 import Tasks from "./Tasks";
 
@@ -123,6 +127,15 @@ function App(props) {
           <Typography variant="h6" content="h1" noWrap>
             FocusDay - Take Notes and add TODOs
           </Typography>
+          <Link href="/">
+            <Button
+              className={classes.aboutButton}
+              color="inherit"
+              onClick={props.onLogoutClick}
+            >
+              Logout
+            </Button>
+          </Link>
 
           <Link href="/about">
             <Button className={classes.aboutButton} color="inherit">

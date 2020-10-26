@@ -1,16 +1,19 @@
 //  Created by Alfonso Cartes.
 //  Copyright © Alfonso Cartes. All rights reserved.
 
-import Head from "next/head";
+import React, { useState } from "react";
+import Link from "next/link";
+import Router from "next/router";
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
-import Link from "next/link";
 import cookie from "js-cookie";
+
+import LoadUserData from "./load";
 import Layout from "../components/Layout";
 import Bar from "../components/Bar";
-import Loading from "../components/Loading";
 import Error from "../components/Error";
-import LogIn from "../components/LogIn";
+import Loading from "../components/Loading";
+import Welcome from "../components/Welcome";
 
 /*
  *
@@ -45,60 +48,32 @@ function Home() {
 
   let loggedIn = false;
 
+  console.log("CHECKING FOR EMAIL IN DATA RESPONSE FROM TOKEN AUTHENTICATION");
   if (data.email) {
+    console.log("EMAIL IN DATA RESPONSE FROM TOKEN AUTHENTICATION FOUND");
     loggedIn = true;
   }
 
-  return (
-    <Layout>
-      <Bar />
-      <div>
-        {loggedIn && (
-          <>
-            <p>Welcome {data.email}!</p>
-            <button
-              onClick={() => {
-                cookie.remove("token");
-                revalidate();
-              }}
-            >
-              Logout
-            </button>
-          </>
-        )}
-        {!loggedIn && (
-          <>
-            <LogIn />
-          </>
-        )}
-      </div>
-    </Layout>
-  );
+  if (loggedIn) {
+    return (
+      <LoadUserData
+        email={data.email}
+        onLogoutClick={() => {
+          console.log("@@@@@ REMOVING COOKIE");
+          loggedIn = false;
+          cookie.remove("token");
+          revalidate();
+        }}
+      />
+    );
+  } else {
+    return (
+      <Layout>
+        <Bar />
+        <Welcome />
+      </Layout>
+    );
+  }
 }
 
 export default Home;
-
-// const fetcher = (url) => fetch(url).then((res) => res.json());
-
-// export default function Index() {
-//   const { data: data, error: error } = useSWR("/api", fetcher);
-
-//   if (error)
-//     return (
-//       <Layout>
-//         <Error />
-//       </Layout>
-//     );
-//   if (!data)
-//     return (
-//       <Layout>
-//         <Loading />
-//       </Layout>
-//     );
-
-//   return (
-//     <Layout>
-//       <App notes={data.notes} tasks={data.tasks} />
-//     </Layout>
-//   );
-// }

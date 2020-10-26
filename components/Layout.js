@@ -3,10 +3,12 @@
 
 import React from "react";
 import Head from "next/head";
-import { makeStyles } from "@material-ui/core/styles";
+
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import StickyFooter from "./StickyFooter";
+
+import { makeStyles } from "@material-ui/core/styles";
 
 /*
  *
@@ -41,7 +43,6 @@ export default function Layout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CssBaseline />
-
       <Container component="main">
         <main>{children}</main>
       </Container>

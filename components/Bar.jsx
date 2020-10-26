@@ -2,22 +2,13 @@
 //  Copyright © Alfonso Cartes. All rights reserved.
 
 import React from "react";
-import clsx from "clsx";
 import Link from "next/link";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import Notes from "./Notes";
-import Tasks from "./Tasks";
 
 /*
  *
@@ -59,10 +50,11 @@ function Bar(props) {
       <CssBaseline />
       <AppBar position="fixed">
         <Toolbar>
-          <Typography variant="h6" content="h1" noWrap>
-            FocusDay - Take Notes and add TODOs
-          </Typography>
-
+          <Link href="/">
+            <Typography variant="h6" content="h1" noWrap>
+              FocusDay - Take Notes and add TODOs
+            </Typography>
+          </Link>
           <Link href="/about">
             <Button className={classes.aboutButton} color="inherit">
               About

@@ -16,8 +16,11 @@ import Bar from "../components/Bar";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function Index() {
+export default function LoadUserData(props) {
   const { data: data, error: error } = useSWR("/api", fetcher);
+
+  console.log("@@@@@@@@@@@@@@@@@@@@@@@ LOAD props");
+  console.log(props);
 
   if (error)
     return (
@@ -36,7 +39,11 @@ export default function Index() {
 
   return (
     <Layout>
-      <App notes={data.notes} tasks={data.tasks} />
+      <App
+        notes={data.notes}
+        tasks={data.tasks}
+        onLogoutClick={props.onLogoutClick}
+      />
     </Layout>
   );
 }
