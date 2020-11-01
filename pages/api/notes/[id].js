@@ -66,7 +66,7 @@ export default async (req, res) => {
     case "DELETE":
       try {
         const deletedNote = await collection.deleteOne({
-          id: id,
+          id: req.body,
         });
         if (!deletedNote) {
           return res.status(400).json({ success: false });
