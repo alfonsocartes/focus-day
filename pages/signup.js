@@ -2,7 +2,7 @@
 //  Copyright © Alfonso Cartes. All rights reserved.
 
 import Layout from "../components/Layout";
-import SignUp from "../components/SignUp";
+import SignUp from "../components/Authentication/SignUp";
 
 /*
  *

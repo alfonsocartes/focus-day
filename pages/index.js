@@ -2,8 +2,6 @@
 //  Copyright © Alfonso Cartes. All rights reserved.
 
 import React, { useState } from "react";
-import Link from "next/link";
-import Router from "next/router";
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 import cookie from "js-cookie";
