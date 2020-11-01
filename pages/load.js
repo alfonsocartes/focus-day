@@ -22,9 +22,6 @@ export default function LoadUserData(props) {
     fetcher
   );
 
-  console.log("@@@@@@@@@@@@@@@@@@@@@@@ LOAD props");
-  console.log(props.data.userId);
-
   if (error)
     return (
       <Layout>

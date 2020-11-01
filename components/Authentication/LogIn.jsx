@@ -77,8 +77,6 @@ export default function LogIn() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("@@@@@@@ HANDLE SUBMIT EMAIL = " + email);
-
     setIsLoading(true);
 
     //call api
@@ -101,9 +99,8 @@ export default function LogIn() {
         }
         if (data && data.token) {
           //set cookie
-          console.log("@@@@@@@ set cookie");
           cookie.set("token", data.token, { expires: 2 });
-          console.log("@@@@@@@ ROUTER PUSH");
+
           Router.push("/");
         }
       });

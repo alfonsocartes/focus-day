@@ -18,8 +18,6 @@ module.exports = async (req, res) => {
     method,
   } = req;
 
-  console.log("########## request body: " + id);
-
   // Get a database connection, cached or otherwise,
   // using the connection string environment variable as the argument
   const db = await connectToDatabase(process.env.MONGO_URI);

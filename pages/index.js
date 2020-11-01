@@ -46,9 +46,7 @@ function Home() {
 
   let loggedIn = false;
 
-  console.log("CHECKING FOR EMAIL IN DATA RESPONSE FROM TOKEN AUTHENTICATION");
   if (data.email) {
-    console.log("EMAIL IN DATA RESPONSE FROM TOKEN AUTHENTICATION FOUND");
     loggedIn = true;
   }
 
@@ -57,7 +55,6 @@ function Home() {
       <LoadUserData
         data={data}
         onLogoutClick={() => {
-          console.log("@@@@@ REMOVING COOKIE");
           loggedIn = false;
           cookie.remove("token");
           revalidate();
