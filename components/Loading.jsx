@@ -16,16 +16,11 @@ import { makeStyles } from "@material-ui/core/styles";
  *
  */
 
-const drawerWidth = 330;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  // necessary for content to be below app bar
+
   toolbar: theme.mixins.toolbar,
 
   title: {
@@ -44,14 +39,6 @@ export default function Loading() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h4" content="h1" className={classes.title}>
-            FocusDay
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Container maxWidth="md">
         <main className={classes.content}>
           <Toolbar />

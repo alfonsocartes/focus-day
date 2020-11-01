@@ -5,8 +5,8 @@ import { connectToDatabase } from "../../../utils/dbConnect";
 
 /*
  *
- * Single Note API Dinamic Route (next.js)
- * It's used to delete a note by ID
+ * User's Notes API Dinamic Route (next.js)
+ * It's used to add and delete a note by ID for a particular User
  * The other methods are for future functionality
  *
  */
@@ -14,46 +14,29 @@ import { connectToDatabase } from "../../../utils/dbConnect";
 export default async (req, res) => {
   const db = await connectToDatabase(process.env.MONGO_URI);
 
-  const collection = await db.collection("notes");
-
   const {
     query: { id },
     method,
   } = req;
 
-  switch (method) {
-    // Not used in this app.
-    case "GET":
-      try {
-        const note = await collection.find({ id: id });
-        if (!note) {
-          return res.status(400).json({ success: false });
-        }
-        res.status(200).json({ success: true, noteData: note });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
-    // Not used in this app.
-    case "PUT":
-      try {
-        const note = await collection.updateOne({ id: id }, req.body, {
-          new: true,
-          runValidators: true,
-        });
-        if (!note) {
-          return res.status(400).json({ success: false });
-        }
-        res.status(204).json({ success: true, noteData: note });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
+  const collection = await db.collection("notes_" + id);
 
+  switch (method) {
+    // Add new note to Mongo DB
+    case "POST":
+      try {
+        const note = await collection.insertOne(req.body);
+        res.status(201).json({ note });
+      } catch (error) {
+        res.status(400).json({ success: false });
+      }
+
+      break;
+    // Deletes new note to Mongo DB
     case "DELETE":
       try {
         const deletedNote = await collection.deleteOne({
-          id: id,
+          id: req.body,
         });
         if (!deletedNote) {
           return res.status(400).json({ success: false });
