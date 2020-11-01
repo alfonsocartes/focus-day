@@ -20,8 +20,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
-import Notes from "./Notes";
-import Tasks from "./Tasks";
+import Notes from "./Notes/Notes";
+import Tasks from "./Tasks/Tasks";
 
 /*
  *

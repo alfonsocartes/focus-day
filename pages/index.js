@@ -13,7 +13,7 @@ import Layout from "../components/Layout";
 import Bar from "../components/Bar";
 import Error from "../components/Error";
 import Loading from "../components/Loading";
-import Welcome from "../components/Welcome";
+import Welcome from "../components/Authentication/Welcome";
 
 /*
  *

@@ -14,8 +14,8 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import Bar from "../components/Bar";
-import Layout from "../components/Layout";
+import Bar from "../Bar";
+import Layout from "../Layout";
 
 import { makeStyles } from "@material-ui/core/styles";
 
