@@ -181,9 +181,9 @@ export default function LogIn() {
             </Grid>
           </form>
         </div>
-        <Box mt={8}>
+        {/* <Box mt={8}>
           <Default />
-        </Box>
+        </Box> */}
       </Container>
     </Layout>
   );
