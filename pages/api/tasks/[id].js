@@ -5,8 +5,8 @@ import { connectToDatabase } from "../../../utils/dbConnect";
 
 /*
  *
- * Single Task API Dinamic Route (next.js)
- * It's used to delete a Task by ID
+ * User's Tasks API Dinamic Route (next.js)
+ * It's used to add and delete a task by ID for a particular User
  * The other methods are for future functionality
  *
  */
@@ -14,30 +14,29 @@ import { connectToDatabase } from "../../../utils/dbConnect";
 export default async (req, res) => {
   const db = await connectToDatabase(process.env.MONGO_URI);
 
-  const collection = await db.collection("tasks");
-
   const {
     query: { id },
     method,
   } = req;
 
+  const collection = await db.collection("tasks_" + id);
+
   switch (method) {
-    case "GET":
+    // Add new task to Mongo DB
+    case "POST":
       try {
-        const task = await collection.find({ id: id });
-        if (!task) {
-          res.status(400).json({ success: false });
-        }
-        res.status(200).json({ success: true, taskData: task });
+        const note = await collection.insertOne(req.body);
+        res.status(201).json({ note });
       } catch (error) {
         res.status(400).json({ success: false });
       }
-      break;
 
+      break;
+    // Modifies task (checked or unchecked)
     case "PUT":
       try {
         const task = await collection.updateOne(
-          { id: id },
+          { id: req.body.id },
           { $set: { checked: req.body.checked } }
         );
         // const task = await collection.replaceOne({ id: id }, req.body);
@@ -49,16 +48,16 @@ export default async (req, res) => {
         res.status(400).json({ success: false });
       }
       break;
-
+    // Deletes new task to Mongo DB
     case "DELETE":
       try {
-        const deletedTask = await collection.deleteOne({
-          id: id,
+        const deletedNote = await collection.deleteOne({
+          id: req.body,
         });
-        if (!deletedTask) {
-          res.status(400).json({ success: false });
+        if (!deletedNote) {
+          return res.status(400).json({ success: false });
         }
-        res.status(200).json({ success: true, taskData: {} });
+        res.status(200).json({ success: true, noteData: {} });
       } catch (error) {
         res.status(400).json({ success: false });
       }

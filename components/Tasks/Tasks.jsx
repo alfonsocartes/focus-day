@@ -63,7 +63,7 @@ function Tasks(props) {
 
   async function addTaskDB(newTask) {
     try {
-      const res = await fetch("/api/tasks", {
+      const res = await fetch(`/api/tasks/${props.userId}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -97,12 +97,13 @@ function Tasks(props) {
 
   async function deleteTaskDB(id) {
     try {
-      const res = await fetch(`/api/tasks/${id}`, {
+      const res = await fetch(`/api/tasks/${props.userId}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(id),
       });
     } catch (error) {
       console.log(error);
@@ -137,7 +138,7 @@ function Tasks(props) {
 
   async function toggleCheckedStatusDB(task) {
     try {
-      const res = await fetch(`/api/tasks/${task.id}`, {
+      const res = await fetch(`/api/tasks/${props.userId}`, {
         method: "PUT",
         headers: {
           Accept: "application/json",
