@@ -6,7 +6,7 @@ import { connectToDatabase } from "../../../utils/dbConnect";
 /*
  *
  * Single Note API Dinamic Route (next.js)
- * It's used to delete a note by ID
+ * It's used to add and delete a note by ID
  * The other methods are for future functionality
  *
  */
@@ -20,9 +20,6 @@ export default async (req, res) => {
   } = req;
 
   const collection = await db.collection("notes_" + id);
-
-  console.log("##### id " + id);
-  console.log("@@@@ note title " + req.title);
 
   switch (method) {
     // Not used in this app.
