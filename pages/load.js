@@ -6,6 +6,7 @@ import App from "../components/App";
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import Bar from "../components/Bar";
 
 /*
  *
@@ -15,25 +16,35 @@ import Error from "../components/Error";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function Index() {
-  const { data: data, error: error } = useSWR("/api", fetcher);
+export default function LoadUserData(props) {
+  const { data: data, error: error } = useSWR(
+    "/api/" + props.data.userId,
+    fetcher
+  );
 
   if (error)
     return (
       <Layout>
+        <Bar />
         <Error />
       </Layout>
     );
   if (!data)
     return (
       <Layout>
+        <Bar />
         <Loading />
       </Layout>
     );
 
   return (
     <Layout>
-      <App notes={data.notes} tasks={data.tasks} />
+      <App
+        userId={props.data.userId}
+        notes={data.notes}
+        tasks={data.tasks}
+        onLogoutClick={props.onLogoutClick}
+      />
     </Layout>
   );
 }

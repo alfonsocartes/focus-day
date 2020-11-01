@@ -60,7 +60,7 @@ function Notes(props) {
   // Function to add a Note to database using API Routes
   async function addNoteDB(newNote) {
     try {
-      const res = await fetch("/api/notes", {
+      const res = await fetch(`/api/notes/${props.userId}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -104,12 +104,13 @@ function Notes(props) {
   // Function to delete a note from DB using the ID
   async function deleteNoteDB(id) {
     try {
-      const res = await fetch(`/api/notes/${id}`, {
+      const res = await fetch(`/api/notes/${props.userId}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(id),
       });
     } catch (error) {
       console.log(error);

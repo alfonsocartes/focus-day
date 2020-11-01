@@ -2,7 +2,7 @@
 //  Copyright © Alfonso Cartes. All rights reserved.
 
 import Layout from "../components/Layout";
-import SignUp from "../components/SignUp";
+import SignUp from "../components/Authentication/SignUp";
 
 /*
  *
@@ -10,10 +10,12 @@ import SignUp from "../components/SignUp";
  *
  */
 
-export default function Login() {
+const Signup = () => {
   return (
     <Layout>
       <SignUp />
     </Layout>
   );
-}
+};
+
+export default Signup;
