@@ -14,8 +14,8 @@ import Container from "@material-ui/core/Container";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import Bar from "../components/Bar";
-import Layout from "../components/Layout";
+import Bar from "../Bar";
+import Layout from "../Layout";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
