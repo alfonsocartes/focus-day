@@ -55,7 +55,7 @@ function Home() {
   if (loggedIn) {
     return (
       <LoadUserData
-        email={data.email}
+        data={data}
         onLogoutClick={() => {
           console.log("@@@@@ REMOVING COOKIE");
           loggedIn = false;

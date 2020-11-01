@@ -14,12 +14,15 @@ import { connectToDatabase } from "../../../utils/dbConnect";
 export default async (req, res) => {
   const db = await connectToDatabase(process.env.MONGO_URI);
 
-  const collection = await db.collection("notes");
-
   const {
     query: { id },
     method,
   } = req;
+
+  const collection = await db.collection("notes_" + id);
+
+  console.log("##### id " + id);
+  console.log("@@@@ note title " + req.title);
 
   switch (method) {
     // Not used in this app.
@@ -33,6 +36,16 @@ export default async (req, res) => {
       } catch (error) {
         res.status(400).json({ success: false });
       }
+      break;
+    // Add new note to Mongo DB
+    case "POST":
+      try {
+        const note = await collection.insertOne(req.body);
+        res.status(201).json({ note });
+      } catch (error) {
+        res.status(400).json({ success: false });
+      }
+
       break;
     // Not used in this app.
     case "PUT":
@@ -49,7 +62,7 @@ export default async (req, res) => {
         res.status(400).json({ success: false });
       }
       break;
-
+    // Deletes new note to Mongo DB
     case "DELETE":
       try {
         const deletedNote = await collection.deleteOne({

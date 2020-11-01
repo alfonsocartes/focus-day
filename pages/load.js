@@ -17,10 +17,13 @@ import Bar from "../components/Bar";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function LoadUserData(props) {
-  const { data: data, error: error } = useSWR("/api", fetcher);
+  const { data: data, error: error } = useSWR(
+    "/api/" + props.data.userId,
+    fetcher
+  );
 
   console.log("@@@@@@@@@@@@@@@@@@@@@@@ LOAD props");
-  console.log(props);
+  console.log(props.data.userId);
 
   if (error)
     return (
@@ -40,6 +43,7 @@ export default function LoadUserData(props) {
   return (
     <Layout>
       <App
+        userId={props.data.userId}
         notes={data.notes}
         tasks={data.tasks}
         onLogoutClick={props.onLogoutClick}

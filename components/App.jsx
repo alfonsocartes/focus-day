@@ -163,7 +163,7 @@ function App(props) {
           </IconButton>
         </div>
         <Divider />
-        <Tasks tasks={props.tasks} />
+        <Tasks userId={props.userId} tasks={props.tasks} />
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -171,7 +171,7 @@ function App(props) {
         })}
       >
         <Toolbar />
-        <Notes notes={props.notes} />
+        <Notes userId={props.userId} notes={props.notes} />
       </main>
     </div>
   );
