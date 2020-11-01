@@ -5,8 +5,8 @@ import { connectToDatabase } from "../../../utils/dbConnect";
 
 /*
  *
- * Single Note API Dinamic Route (next.js)
- * It's used to add and delete a note by ID
+ * User's Notes API Dinamic Route (next.js)
+ * It's used to add and delete a note by ID for a particular User
  * The other methods are for future functionality
  *
  */
