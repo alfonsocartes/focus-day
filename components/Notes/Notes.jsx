@@ -60,7 +60,7 @@ function Notes(props) {
   // Function to add a Note to database using API Routes
   async function addNoteDB(newNote) {
     try {
-      const res = await fetch("/api/notes/" + props.userId, {
+      const res = await fetch(`/api/notes/${props.userId}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
