@@ -2,6 +2,7 @@
 //  Copyright © Alfonso Cartes. All rights reserved.
 
 import useSWR from "swr";
+
 import App from "../components/App";
 import Layout from "../components/Layout";
 import Loading from "../components/Loading";

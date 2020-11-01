@@ -8,7 +8,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Note from "./Note";
 import NoteCreation from "./NoteCreation";
-import { add } from "date-fns";
 
 /*
  *

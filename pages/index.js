@@ -1,12 +1,12 @@
 //  Created by Alfonso Cartes.
 //  Copyright © Alfonso Cartes. All rights reserved.
 
-import React, { useState } from "react";
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 import cookie from "js-cookie";
 
 import LoadUserData from "./load";
+
 import Layout from "../components/Layout";
 import Bar from "../components/Bar";
 import Error from "../components/Error";
