@@ -5,7 +5,7 @@ import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 import cookie from "js-cookie";
 
-import LoadUserData from "./load";
+import LoadUserData from "./api/load";
 
 import Layout from "../components/Layout";
 import Bar from "../components/Bar";
@@ -19,13 +19,12 @@ import Welcome from "../components/Authentication/Welcome";
  *
  */
 
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
 function Home() {
-  const { data, revalidate, error: error } = useSWR(
+  const { data: data, revalidate, error: error } = useSWR(
     "/api/authentication",
-    async function (args) {
-      const res = await fetch(args);
-      return res.json();
-    }
+    fetcher
   );
 
   if (error)

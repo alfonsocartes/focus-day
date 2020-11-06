@@ -3,11 +3,11 @@
 
 import useSWR from "swr";
 
-import App from "../components/App";
-import Layout from "../components/Layout";
-import Loading from "../components/Loading";
-import Error from "../components/Error";
-import Bar from "../components/Bar";
+import App from "../../components/App";
+import Layout from "../../components/Layout";
+import Loading from "../../components/Loading";
+import Error from "../../components/Error";
+import Bar from "../../components/Bar";
 
 /*
  *
@@ -19,7 +19,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function LoadUserData(props) {
   const { data: data, error: error } = useSWR(
-    "/api/" + props.data.userId,
+    `/api/${props.data.userId}`,
     fetcher
   );
 
