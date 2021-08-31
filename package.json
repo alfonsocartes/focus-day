@@ -21,7 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.10",
     "mongoose-findorcreate": "^3.0.0",
-    "next": "^10.2.0",
+    "next": "^11.1.2",
     "node-fetch": "^2.6.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
